@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Connectivity_Tracker.Views"
+             xmlns:oxy="http://oxyplot.org/wpf"
              mc:Ignorable="d"
              d:DesignHeight="450"
-        d:DesignWidth="800"
+             d:DesignWidth="800"
              Background="#F5F5F5">
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -24,7 +25,7 @@
 
             <!-- Context Selector -->
             <StackPanel Orientation="Horizontal"
-                    Margin="0,0,0,20">
+                        Margin="0,0,0,20">
                 <TextBlock Text="Current Location:"
                            FontSize="14"
                            VerticalAlignment="Center"
@@ -35,17 +36,17 @@
                           SelectedIndex="0"
                           SelectionChanged="ContextComboBox_SelectionChanged">
                     <ComboBoxItem Content="Zuhause"
-                            Tag="Home"/>
+                                  Tag="Home"/>
                     <ComboBoxItem Content="Zug"
-                            Tag="Train"/>
+                                  Tag="Train"/>
                     <ComboBoxItem Content="Auto"
-                            Tag="Car"/>
+                                  Tag="Car"/>
                     <ComboBoxItem Content="Café"
-                            Tag="Cafe"/>
+                                  Tag="Cafe"/>
                     <ComboBoxItem Content="Unterwegs"
-                            Tag="OnTheGo"/>
+                                  Tag="OnTheGo"/>
                     <ComboBoxItem Content="Büro"
-                            Tag="Office"/>
+                                  Tag="Office"/>
                 </ComboBox>
             </StackPanel>
         </StackPanel>
@@ -80,7 +81,7 @@
 
                         <!-- Ping Status -->
                         <StackPanel Grid.Column="0"
-                                Margin="0,0,20,0">
+                                    Margin="0,0,20,0">
                             <TextBlock Text="Latency"
                                        FontSize="14"
                                        Foreground="#666"/>
@@ -93,7 +94,7 @@
 
                         <!-- Download Rate -->
                         <StackPanel Grid.Column="1"
-                                Margin="0,0,20,0">
+                                    Margin="0,0,20,0">
                             <TextBlock Text="Download"
                                        FontSize="14"
                                        Foreground="#666"/>
@@ -119,24 +120,18 @@
                 </StackPanel>
             </Border>
 
-            <!-- History Graph Placeholder -->
+            <!-- History Graph -->
             <Border Style="{StaticResource Card}"
                     Grid.Row="1"
                     Background="White">
                 <StackPanel>
-                    <TextBlock Text="Connection History"
+                    <TextBlock Text="Connection History (Last Hour)"
                                FontSize="20"
                                FontWeight="SemiBold"
                                Margin="0,0,0,15"/>
-                    <Border Height="200"
-                            Background="#F5F5F5"
-                            CornerRadius="4">
-                        <TextBlock Text="[Chart Placeholder]"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   Foreground="#999"
-                                   FontSize="16"/>
-                    </Border>
+                    <oxy:PlotView x:Name="DashboardPlot"
+                                  Height="200"
+                                  Model="{Binding HistoryPlotModel}"/>
                 </StackPanel>
             </Border>
         </Grid>

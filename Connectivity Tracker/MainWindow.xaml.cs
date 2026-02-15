@@ -113,7 +113,7 @@ namespace Connectivity_Tracker
 
         private void NavigateToDashboard(object? sender, RoutedEventArgs? e)
         {
-            _dashboardView ??= new DashboardView(_networkService);
+            _dashboardView ??= new DashboardView(_networkService, _databaseRepository);
             MainContentArea.Content = _dashboardView;
             UpdateNavigationButtonState(DashboardButton);
         }

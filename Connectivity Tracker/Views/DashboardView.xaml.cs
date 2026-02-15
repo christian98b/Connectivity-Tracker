@@ -1,6 +1,7 @@
 using Connectivity_Tracker.ViewModels;
 using Connectivity_Tracker.Services;
 using System;
+using System.Windows.Threading;
 
 namespace Connectivity_Tracker.Views
 {
@@ -8,19 +9,43 @@ namespace Connectivity_Tracker.Views
     {
         private readonly DashboardViewModel _viewModel;
         private readonly NetworkMonitorService _networkService;
+        private readonly DatabaseRepository _databaseRepository;
+        private readonly DispatcherTimer _historyUpdateTimer;
         private string _currentContext = "Home";
         private bool _disposed = false;
 
-        public DashboardView(NetworkMonitorService networkService)
+        public DashboardView(NetworkMonitorService networkService, DatabaseRepository databaseRepository)
         {
             InitializeComponent();
 
             _networkService = networkService;
+            _databaseRepository = databaseRepository;
             _viewModel = new DashboardViewModel();
             DataContext = _viewModel;
 
             _networkService.MetricsUpdated += OnMetricsUpdated;
             _networkService.TrafficUpdated += OnTrafficUpdated;
+
+            // Update history chart every 30 seconds
+            _historyUpdateTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(30)
+            };
+            _historyUpdateTimer.Tick += (s, e) => LoadRecentHistory();
+            _historyUpdateTimer.Start();
+
+            LoadRecentHistory();
+        }
+
+        private void LoadRecentHistory()
+        {
+            var endTime = DateTime.Now;
+            var startTime = endTime.AddHours(-1);
+
+            var recentMetrics = _databaseRepository.GetMetrics(startTime, endTime, 500);
+            var orderedMetrics = recentMetrics.OrderBy(m => m.Timestamp).ToList();
+
+            _viewModel.UpdateHistoryChart(orderedMetrics);
         }
 
         private void OnMetricsUpdated(object? sender, Models.NetworkMetrics metrics)
@@ -52,6 +77,7 @@ namespace Connectivity_Tracker.Views
         {
             if (!_disposed)
             {
+                _historyUpdateTimer?.Stop();
                 _networkService.MetricsUpdated -= OnMetricsUpdated;
                 _networkService.TrafficUpdated -= OnTrafficUpdated;
                 _disposed = true;
