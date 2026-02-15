@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Connectivity_Tracker.Views;
@@ -18,7 +19,10 @@ namespace Connectivity_Tracker
         private readonly SettingsService _settingsService;
         private readonly TaskbarPingOverlayService _taskbarPingOverlayService;
         private bool _showPingInTaskbar;
+        private bool _showPingInTray;
         private bool _taskbarOverlaySupported = true;
+        private DateTime _lastTrayIconUpdate = DateTime.MinValue;
+        private readonly TimeSpan _trayIconUpdateThrottle = TimeSpan.FromSeconds(2);
 
         // Cached views to prevent memory leaks from event handler subscriptions
         private DashboardView? _dashboardView;
@@ -36,6 +40,7 @@ namespace Connectivity_Tracker
 
             var settings = _settingsService.CurrentSettings;
             _showPingInTaskbar = settings.ShowPingInTaskbar;
+            _showPingInTray = settings.ShowPingInTray;
             _notificationService = new NotificationService(_notifyIcon!, settings.AlertThresholdMs);
             _networkService = new NetworkMonitorService(settings.PingTarget, settings.PingIntervalSeconds);
             _networkService.MetricsUpdated += OnMetricsUpdated;
@@ -54,6 +59,7 @@ namespace Connectivity_Tracker
             _networkService.UpdateInterval(settings.PingIntervalSeconds);
             _networkService.UpdatePingTarget(settings.PingTarget);
             _showPingInTaskbar = settings.ShowPingInTaskbar;
+            _showPingInTray = settings.ShowPingInTray;
 
             if (!_showPingInTaskbar)
             {
@@ -64,6 +70,12 @@ namespace Connectivity_Tracker
                 {
                     _notifyIcon.Text = "Connectivity Tracker";
                 }
+            }
+
+            // Reset tray icon to default if ShowPingInTray is disabled
+            if (!_showPingInTray && _notifyIcon is not null)
+            {
+                _notifyIcon.Icon = SystemIcons.Application;
             }
         }
 
@@ -89,6 +101,36 @@ namespace Connectivity_Tracker
 
             var update = _taskbarPingOverlayService.BuildUpdate(metrics, _showPingInTaskbar, _taskbarOverlaySupported);
             _notifyIcon.Text = update.TrayTooltip;
+
+            // Update tray icon with ping value if enabled and throttling allows
+            if (_showPingInTray)
+            {
+                var now = DateTime.UtcNow;
+                if ((now - _lastTrayIconUpdate) >= _trayIconUpdateThrottle)
+                {
+                    try
+                    {
+                        var pingMs = metrics.PingSuccess ? (int?)metrics.PingLatency : null;
+                        var newIcon = TrayIconGenerator.GeneratePingIcon(pingMs);
+
+                        // Dispose old icon before setting new one to prevent memory leaks
+                        var oldIcon = _notifyIcon.Icon;
+                        _notifyIcon.Icon = newIcon;
+
+                        if (oldIcon != SystemIcons.Application)
+                        {
+                            oldIcon?.Dispose();
+                        }
+
+                        _lastTrayIconUpdate = now;
+                    }
+                    catch
+                    {
+                        // If icon generation fails, fall back to default icon
+                        _notifyIcon.Icon = SystemIcons.Application;
+                    }
+                }
+            }
 
             TaskbarItemInfo ??= new TaskbarItemInfo();
 

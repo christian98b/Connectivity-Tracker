@@ -87,8 +87,12 @@
                           IsChecked="{Binding MinimizeToTrayOnStartup}"/>
 
                 <CheckBox Content="Show ping in taskbar"
-                          Margin="0,0,0,20"
+                          Margin="0,0,0,10"
                           IsChecked="{Binding ShowPingInTaskbar}"/>
+
+                <CheckBox Content="Show ping in tray icon"
+                          Margin="0,0,0,20"
+                          IsChecked="{Binding ShowPingInTray}"/>
 
                 <!-- Buttons -->
                 <StackPanel Orientation="Horizontal"

@@ -28,6 +28,7 @@ namespace Connectivity_Tracker.ViewModels
         private bool _startWithWindows;
         private bool _minimizeToTrayOnStartup;
         private bool _showPingInTaskbar;
+        private bool _showPingInTray;
 
         public ObservableCollection<string> PingIntervalOptions { get; }
         public ObservableCollection<PingServerOption> PingServerOptions { get; }
@@ -66,6 +67,12 @@ namespace Connectivity_Tracker.ViewModels
         {
             get => _showPingInTaskbar;
             set => SetProperty(ref _showPingInTaskbar, value);
+        }
+
+        public bool ShowPingInTray
+        {
+            get => _showPingInTray;
+            set => SetProperty(ref _showPingInTray, value);
         }
 
         public ICommand SaveCommand { get; }
@@ -117,6 +124,7 @@ namespace Connectivity_Tracker.ViewModels
             _startWithWindows = settings.StartWithWindows;
             _minimizeToTrayOnStartup = settings.MinimizeToTrayOnStartup;
             _showPingInTaskbar = settings.ShowPingInTaskbar;
+            _showPingInTray = settings.ShowPingInTray;
         }
 
         private void SaveSettings()
@@ -151,7 +159,8 @@ namespace Connectivity_Tracker.ViewModels
                 AlertThresholdMs = threshold,
                 StartWithWindows = _startWithWindows,
                 MinimizeToTrayOnStartup = _minimizeToTrayOnStartup,
-                ShowPingInTaskbar = _showPingInTaskbar
+                ShowPingInTaskbar = _showPingInTaskbar,
+                ShowPingInTray = _showPingInTray
             };
 
             _settingsService.UpdateSettings(settings);

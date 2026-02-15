@@ -8,5 +8,6 @@ namespace Connectivity_Tracker.Models
         public bool StartWithWindows { get; set; } = false;
         public bool MinimizeToTrayOnStartup { get; set; } = true;
         public bool ShowPingInTaskbar { get; set; } = true;
+        public bool ShowPingInTray { get; set; } = true;
     }
 }
