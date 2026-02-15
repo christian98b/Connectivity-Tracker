@@ -152,6 +152,13 @@ Akzeptanzkriterien:
 
 
 
+**Story 3.4: Icon in der Taskbar**
+> Als Nutzer möchte ich die möglichkeit haben den aktuellen Ping in der Taskbar zu sehen. 
+Akzeptanzkriterien:
+    - in der Taskbar wird der aktuell gemessene Ping angezeigt.
+
+
+
 ### Epic 4: Datenhistorie & UI
 
 **Story 4.1: Verlaufansicht**
