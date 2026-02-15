@@ -45,6 +45,7 @@ C:\Users\Chris\projects\Connectivity Tracker\Connectivity Tracker\obj\Debug\net8
 C:\Users\Chris\projects\Connectivity Tracker\Connectivity Tracker\obj\Debug\net8.0-windows10.0.19041.0\App.g.cs
 C:\Users\Chris\projects\Connectivity Tracker\Connectivity Tracker\obj\Debug\net8.0-windows10.0.19041.0\Connectivity Tracker_MarkupCompile.cache
 C:\Users\Chris\projects\Connectivity Tracker\Connectivity Tracker\obj\Debug\net8.0-windows10.0.19041.0\Connectivity Tracker_MarkupCompile.lref
+C:\Users\Chris\projects\Connectivity Tracker\Connectivity Tracker\obj\Debug\net8.0-windows10.0.19041.0\App.baml
 C:\Users\Chris\projects\Connectivity Tracker\Connectivity Tracker\obj\Debug\net8.0-windows10.0.19041.0\MainWindow.baml
 C:\Users\Chris\projects\Connectivity Tracker\Connectivity Tracker\obj\Debug\net8.0-windows10.0.19041.0\Views\DashboardView.baml
 C:\Users\Chris\projects\Connectivity Tracker\Connectivity Tracker\obj\Debug\net8.0-windows10.0.19041.0\Views\HistoryView.baml
@@ -61,4 +62,3 @@ C:\Users\Chris\projects\Connectivity Tracker\Connectivity Tracker\obj\Debug\net8
 C:\Users\Chris\projects\Connectivity Tracker\Connectivity Tracker\obj\Debug\net8.0-windows10.0.19041.0\Connectivity Tracker.pdb
 C:\Users\Chris\projects\Connectivity Tracker\Connectivity Tracker\obj\Debug\net8.0-windows10.0.19041.0\Connectivity Tracker.genruntimeconfig.cache
 C:\Users\Chris\projects\Connectivity Tracker\Connectivity Tracker\obj\Debug\net8.0-windows10.0.19041.0\ref\Connectivity Tracker.dll
-C:\Users\Chris\projects\Connectivity Tracker\Connectivity Tracker\obj\Debug\net8.0-windows10.0.19041.0\App.baml

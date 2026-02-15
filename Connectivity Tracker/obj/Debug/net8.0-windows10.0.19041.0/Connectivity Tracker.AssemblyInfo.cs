@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Connectivity Tracker")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f9700e601f24a2b937d590210c9a0b4e29fffcf9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+95fd3d660f7990901f05478651abec02c4286a19")]
 [assembly: System.Reflection.AssemblyProductAttribute("Connectivity Tracker")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Connectivity Tracker")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
