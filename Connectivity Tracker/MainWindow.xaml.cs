@@ -16,6 +16,11 @@ namespace Connectivity_Tracker
         private readonly DatabaseRepository _databaseRepository;
         private readonly SettingsService _settingsService;
 
+        // Cached views to prevent memory leaks from event handler subscriptions
+        private DashboardView? _dashboardView;
+        private HistoryView? _historyView;
+        private SettingsView? _settingsView;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -98,35 +103,47 @@ namespace Connectivity_Tracker
         protected override void OnClosed(EventArgs e)
         {
             _networkService?.Stop();
+
+            // Dispose cached views to prevent memory leaks from event handler subscriptions
+            _dashboardView?.Dispose();
+
             _notifyIcon?.Dispose();
             base.OnClosed(e);
         }
 
         private void NavigateToDashboard(object? sender, RoutedEventArgs? e)
         {
-            MainContentArea.Content = new DashboardView(_networkService);
+            _dashboardView ??= new DashboardView(_networkService);
+            MainContentArea.Content = _dashboardView;
             UpdateNavigationButtonState(DashboardButton);
         }
 
         private void NavigateToHistory(object? sender, RoutedEventArgs? e)
         {
-            MainContentArea.Content = new HistoryView();
+            _historyView ??= new HistoryView();
+            MainContentArea.Content = _historyView;
             UpdateNavigationButtonState(HistoryButton);
         }
 
         private void NavigateToSettings(object? sender, RoutedEventArgs? e)
         {
-            MainContentArea.Content = new SettingsView(_settingsService, _databaseRepository);
+            _settingsView ??= new SettingsView(_settingsService, _databaseRepository);
+            MainContentArea.Content = _settingsView;
             UpdateNavigationButtonState(SettingsButton);
         }
 
         private void UpdateNavigationButtonState(System.Windows.Controls.Button activeButton)
         {
-            DashboardButton.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#757575"));
-            HistoryButton.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#757575"));
-            SettingsButton.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#757575"));
+            var inactiveColor = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#757575");
+            var activeColor = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#2196F3");
 
-            activeButton.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#2196F3"));
+            // Reset all buttons to inactive state
+            DashboardButton.SetValue(System.Windows.Controls.Button.BackgroundProperty, new SolidColorBrush(inactiveColor));
+            HistoryButton.SetValue(System.Windows.Controls.Button.BackgroundProperty, new SolidColorBrush(inactiveColor));
+            SettingsButton.SetValue(System.Windows.Controls.Button.BackgroundProperty, new SolidColorBrush(inactiveColor));
+
+            // Set active button
+            activeButton.SetValue(System.Windows.Controls.Button.BackgroundProperty, new SolidColorBrush(activeColor));
         }
     }
 }

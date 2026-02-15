@@ -1,13 +1,15 @@
 using Connectivity_Tracker.ViewModels;
 using Connectivity_Tracker.Services;
+using System;
 
 namespace Connectivity_Tracker.Views
 {
-    public partial class DashboardView : System.Windows.Controls.UserControl
+    public partial class DashboardView : System.Windows.Controls.UserControl, IDisposable
     {
         private readonly DashboardViewModel _viewModel;
         private readonly NetworkMonitorService _networkService;
         private string _currentContext = "Home";
+        private bool _disposed = false;
 
         public DashboardView(NetworkMonitorService networkService)
         {
@@ -35,6 +37,16 @@ namespace Connectivity_Tracker.Views
             {
                 _currentContext = item.Tag?.ToString() ?? "Home";
             }
+        }
+
+        public void Dispose()
+        {
+            if (!_disposed)
+            {
+                _networkService.MetricsUpdated -= OnMetricsUpdated;
+                _disposed = true;
+            }
+            GC.SuppressFinalize(this);
         }
     }
 }
