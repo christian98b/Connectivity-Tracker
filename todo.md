@@ -110,6 +110,13 @@
 - [x] Fallback to system tray tooltip if taskbar overlay is unsupported
 - [x] Add unit/integration tests and manual verification steps
 
+### Story 3.5: Ping im System-Tray (Infobereich)
+- [ ] Render current ping value into the system tray icon (NotifyIcon 16×16)
+- [ ] Throttle icon updates to reduce CPU / I/O (e.g. no more frequent than every 2s)
+- [ ] Add `Settings` toggle `Show ping in tray` and persist choice
+- [ ] Fallback to tray tooltip if tray-icon rendering is unsupported
+- [ ] Add unit/integration tests and include manual verification steps
+
 ---
 
 ## Epic 4: Datenhistorie & UI

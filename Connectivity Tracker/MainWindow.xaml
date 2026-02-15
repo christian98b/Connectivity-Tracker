@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="clr-namespace:Connectivity_Tracker"
-    xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        xmlns:local="clr-namespace:Connectivity_Tracker"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
         mc:Ignorable="d"
         Title="Connectivity Tracker"
         Height="600"
@@ -16,13 +16,13 @@
         ResizeMode="CanResize">
 
     <Window.TaskbarItemInfo>
-        <shell:TaskbarItemInfo />
+        <shell:TaskbarItemInfo/>
     </Window.TaskbarItemInfo>
 
     <Window.Resources>
         <!-- Modern Button Style -->
         <Style x:Key="ModernButton"
-                TargetType="Button">
+               TargetType="Button">
             <Setter Property="Background"
                     Value="#2196F3"/>
             <Setter Property="Foreground"
@@ -49,7 +49,7 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver"
-                        Value="True">
+                         Value="True">
                     <Setter Property="Background"
                             Value="#1976D2"/>
                 </Trigger>
@@ -58,7 +58,7 @@
 
         <!-- Card Style -->
         <Style x:Key="Card"
-                TargetType="Border">
+               TargetType="Border">
             <Setter Property="Background"
                     Value="White"/>
             <Setter Property="CornerRadius"

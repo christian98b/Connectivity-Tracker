@@ -158,6 +158,18 @@ Akzeptanzkriterien:
     - in der Taskbar wird der aktuell gemessene Ping angezeigt.
 
 
+**Story 3.5: Ping im System-Tray (Infobereich) als Icon**
+> Als Nutzer möchte ich, dass das System-Tray-Icon (Infobereich) den aktuellen Ping-Wert direkt als Icon darstellt, damit ich den Verbindungszustand schnell ohne zusätzliches Fenster ablesen kann.
+
+Akzeptanzkriterien:
+    - Das System-Tray-Icon (NotifyIcon) zeigt den aktuellen Ping-Wert (z. B. "42" oder "X" bei Fehler) als gerendertes 16×16-Icon.
+    - Updates erfolgen im konfigurierten Ping-Intervall, mit Throttling (z. B. nicht häufiger als alle 2 Sekunden) um CPU-/I/O-Overhead zu vermeiden.
+    - Es gibt eine Settings-Option `Show ping in tray` (Checkbox) — die Einstellung wird persistent gespeichert und beim nächsten Start wiederhergestellt.
+    - Bei Systemen oder Umgebungen, in denen das Setzen eines dynamischen Tray-Icon nicht möglich ist, wird auf die Tray-Tooltip-Variante mit aktuellem Ping zurückgegriffen.
+    - Darstellung muss bei geringer Icon-Auflösung lesbar bleiben (Kurzformat: `X`, `1K`, oder numerisch gekürzt).
+    - Unit-Tests und manuelle Verifikation (Schritte dokumentiert) sind vorhanden.
+
+
 
 ### Epic 4: Datenhistorie & UI
 
