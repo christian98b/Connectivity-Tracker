@@ -150,7 +150,7 @@
 - [ ] User manual/help documentation
 - [ ] Installation guide
 - [ ] Developer documentation
-- [ ] README file
+- [x] README file
 - [ ] License information
 
 ### Deployment
