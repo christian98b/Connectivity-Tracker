@@ -46,6 +46,7 @@ namespace Connectivity_Tracker
             var settings = _settingsService.CurrentSettings;
             _notificationService.UpdateThreshold(settings.AlertThresholdMs);
             _networkService.UpdateInterval(settings.PingIntervalSeconds);
+            _networkService.UpdatePingTarget(settings.PingTarget);
         }
 
         private async void InitializeServicesAsync()

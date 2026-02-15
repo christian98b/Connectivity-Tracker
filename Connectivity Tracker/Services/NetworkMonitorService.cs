@@ -6,7 +6,7 @@ namespace Connectivity_Tracker.Services
     public class NetworkMonitorService
     {
         private System.Threading.Timer? _pingTimer;
-        private readonly string _pingTarget;
+        private string _pingTarget;
         private int _pingInterval;
         private readonly TrafficMonitorService _trafficMonitor;
         private readonly LocationService _locationService;
@@ -62,6 +62,14 @@ namespace Connectivity_Tracker.Services
             }
         }
 
+        public void UpdatePingTarget(string pingTarget)
+        {
+            if (!string.IsNullOrWhiteSpace(pingTarget))
+            {
+                _pingTarget = pingTarget;
+            }
+        }
+
         private void OnTrafficSampled(object? sender, (double downloadSpeed, double uploadSpeed) traffic)
         {
             _currentMetrics.DownloadSpeed = traffic.downloadSpeed;
@@ -73,8 +81,9 @@ namespace Connectivity_Tracker.Services
         {
             try
             {
+                var currentPingTarget = _pingTarget;
                 using var pinger = new Ping();
-                var reply = await pinger.SendPingAsync(_pingTarget, 5000);
+                var reply = await pinger.SendPingAsync(currentPingTarget, 5000);
 
                 var (latitude, longitude) = await _locationService.GetCurrentLocationAsync();
 
@@ -114,8 +123,9 @@ namespace Connectivity_Tracker.Services
         {
             try
             {
+                var currentPingTarget = _pingTarget;
                 using var pinger = new Ping();
-                var reply = await pinger.SendPingAsync(_pingTarget, 5000);
+                var reply = await pinger.SendPingAsync(currentPingTarget, 5000);
 
                 var (latitude, longitude) = await _locationService.GetCurrentLocationAsync();
 

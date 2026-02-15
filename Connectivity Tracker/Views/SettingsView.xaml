@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Connectivity_Tracker.Views"
              mc:Ignorable="d"
              d:DesignHeight="450"
-        d:DesignWidth="800"
+             d:DesignWidth="800"
              Background="#F5F5F5">
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -33,14 +33,26 @@
                            Margin="0,0,0,10"/>
 
                 <StackPanel Orientation="Horizontal"
-                        Margin="0,0,0,20">
+                            Margin="0,0,0,20">
                     <TextBlock Text="Ping Interval:"
                                VerticalAlignment="Center"
                                Width="150"/>
                     <ComboBox Width="200"
-                            Height="30"
-                            ItemsSource="{Binding PingIntervalOptions}"
-                            SelectedIndex="{Binding SelectedPingIntervalIndex}"/>
+                              Height="30"
+                              ItemsSource="{Binding PingIntervalOptions}"
+                              SelectedIndex="{Binding SelectedPingIntervalIndex}"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,0,0,20">
+                    <TextBlock Text="Ping Server:"
+                               VerticalAlignment="Center"
+                               Width="150"/>
+                    <ComboBox Width="200"
+                              Height="30"
+                              ItemsSource="{Binding PingServerOptions}"
+                              DisplayMemberPath="Name"
+                              SelectedIndex="{Binding SelectedPingServerIndex}"/>
                 </StackPanel>
 
                 <!-- Alert Threshold -->
@@ -50,7 +62,7 @@
                            Margin="0,10,0,10"/>
 
                 <StackPanel Orientation="Horizontal"
-                        Margin="0,0,0,20">
+                            Margin="0,0,0,20">
                     <TextBlock Text="Alert Threshold (ms):"
                                VerticalAlignment="Center"
                                Width="150"/>
@@ -75,7 +87,8 @@
                           IsChecked="{Binding MinimizeToTrayOnStartup}"/>
 
                 <!-- Buttons -->
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <StackPanel Orientation="Horizontal"
+                        Margin="0,10,0,0">
                     <Button Content="Save Settings"
                             Style="{StaticResource ModernButton}"
                             Width="180"

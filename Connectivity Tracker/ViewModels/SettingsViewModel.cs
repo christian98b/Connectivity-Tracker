@@ -5,22 +5,42 @@ using Connectivity_Tracker.Services;
 
 namespace Connectivity_Tracker.ViewModels
 {
+    public class PingServerOption
+    {
+        public string Name { get; }
+        public string Target { get; }
+
+        public PingServerOption(string name, string target)
+        {
+            Name = name;
+            Target = target;
+        }
+    }
+
     public class SettingsViewModel : ViewModelBase
     {
         private readonly SettingsService _settingsService;
         private readonly DatabaseRepository _databaseRepository;
 
         private int _selectedPingIntervalIndex;
-        private string _alertThreshold;
+        private int _selectedPingServerIndex;
+        private string _alertThreshold = string.Empty;
         private bool _startWithWindows;
         private bool _minimizeToTrayOnStartup;
 
         public ObservableCollection<string> PingIntervalOptions { get; }
+        public ObservableCollection<PingServerOption> PingServerOptions { get; }
 
         public int SelectedPingIntervalIndex
         {
             get => _selectedPingIntervalIndex;
             set => SetProperty(ref _selectedPingIntervalIndex, value);
+        }
+
+        public int SelectedPingServerIndex
+        {
+            get => _selectedPingServerIndex;
+            set => SetProperty(ref _selectedPingServerIndex, value);
         }
 
         public string AlertThreshold
@@ -56,6 +76,14 @@ namespace Connectivity_Tracker.ViewModels
                 "60 seconds"
             };
 
+            PingServerOptions = new ObservableCollection<PingServerOption>
+            {
+                new PingServerOption("Cloudflare", "1.1.1.1"),
+                new PingServerOption("Telekom", "www.telekom.de"),
+                new PingServerOption("Google", "8.8.8.8"),
+                new PingServerOption("Quad9", "9.9.9.9")
+            };
+
             SaveCommand = new RelayCommand(SaveSettings);
             ExportDataCommand = new RelayCommand(ExportData);
 
@@ -73,6 +101,10 @@ namespace Connectivity_Tracker.ViewModels
                 60 => 2,
                 _ => 1
             };
+
+            _selectedPingServerIndex = PingServerOptions
+                .Select((option, index) => new { option, index })
+                .FirstOrDefault(item => string.Equals(item.option.Target, settings.PingTarget, StringComparison.OrdinalIgnoreCase))?.index ?? 2;
 
             _alertThreshold = settings.AlertThresholdMs.ToString();
             _startWithWindows = settings.StartWithWindows;
@@ -100,10 +132,14 @@ namespace Connectivity_Tracker.ViewModels
                 _ => 10
             };
 
+            var selectedPingServer = _selectedPingServerIndex >= 0 && _selectedPingServerIndex < PingServerOptions.Count
+                ? PingServerOptions[_selectedPingServerIndex]
+                : PingServerOptions[2];
+
             var settings = new AppSettings
             {
                 PingIntervalSeconds = pingInterval,
-                PingTarget = _settingsService.CurrentSettings.PingTarget,
+                PingTarget = selectedPingServer.Target,
                 AlertThresholdMs = threshold,
                 StartWithWindows = _startWithWindows,
                 MinimizeToTrayOnStartup = _minimizeToTrayOnStartup
