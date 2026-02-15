@@ -4,79 +4,79 @@
 
 ### Ausgangslage & Problemstellung
 
-In einer zunehmend mobilen und digitalen Arbeitswelt ist eine stabile Internetverbindung die kritischste Ressource. Nutzer – ob im Homeoffice, im Zug oder im Café – stehen häufig vor dem Problem schwankender Verbindungsqualität. Oft ist unklar, ob das Problem beim Provider, am aktuellen Standort oder an der eigenen Auslastung liegt. Es fehlt an Werkzeugen, die diese Daten nicht nur messen, sondern auch mit dem geografischen Standort und dem Nutzungskontext verknüpfen.
+In einer zunehmend mobilen und digitalen Arbeitswelt ist eine stabile Internetverbindung die kritischste Ressource. Nutzer ï¿½ ob im Homeoffice, im Zug oder im Cafï¿½ ï¿½ stehen hï¿½ufig vor dem Problem schwankender Verbindungsqualitï¿½t. Oft ist unklar, ob das Problem beim Provider, am aktuellen Standort oder an der eigenen Auslastung liegt. Es fehlt an Werkzeugen, die diese Daten nicht nur messen, sondern auch mit dem geografischen Standort und dem Nutzungskontext verknï¿½pfen.
 
 ### Projektziel
 
-Ziel dieses Projektes ist die Entwicklung einer nativen Windows-Applikation („Connectivity Tracker“), die als intelligenter Hintergrunddienst agiert. Das Tool soll Transparenz über die Netzqualität schaffen, indem es technische Metriken mit realen Welt-Daten (Standort, Umgebung) korreliert und den Nutzer proaktiv bei Veränderungen informiert.
+Ziel dieses Projektes ist die Entwicklung einer nativen Windows-Applikation (ï¿½Connectivity Trackerï¿½), die als intelligenter Hintergrunddienst agiert. Das Tool soll Transparenz ï¿½ber die Netzqualitï¿½t schaffen, indem es technische Metriken mit realen Welt-Daten (Standort, Umgebung) korreliert und den Nutzer proaktiv bei Verï¿½nderungen informiert.
 ### Kernfunktionen (Key Features)
 
-Das System stützt sich auf vier funktionale Säulen:
+Das System stï¿½tzt sich auf vier funktionale Sï¿½ulen:
 
-1. **Echtzeit-Diagnose:** Kontinuierliche Überwachung der Latenz (Ping zu Referenzservern) und des lokalen Datendurchsatzes, um Engpässe sofort zu identifizieren.
-2. **Location Intelligence:** Verknüpfung von Leistungsdaten mit GPS-Koordinaten, um „Funklöcher“ auf einer Karte visualisierbar zu machen.
-3. **Kontext-Bewusstsein:** Manuelle Kategorisierung der Umgebung (z. B. „Im Zug“, „Homeoffice“, „Hotel“), um statistische Vergleiche zwischen verschiedenen Arbeitsorten zu ermöglichen.
-4. **Proaktive Warnsysteme:** Intelligente Benachrichtigungen, die den Nutzer warnen, _bevor_ die Verbindung komplett abreißt (z. B. bei steigender Latenz), und informieren, sobald die Leitung wieder stabil ist.
+1. **Echtzeit-Diagnose:** Kontinuierliche ï¿½berwachung der Latenz (Ping zu Referenzservern) und des lokalen Datendurchsatzes, um Engpï¿½sse sofort zu identifizieren.
+2. **Location Intelligence:** Verknï¿½pfung von Leistungsdaten mit GPS-Koordinaten, um ï¿½Funklï¿½cherï¿½ auf einer Karte visualisierbar zu machen.
+3. **Kontext-Bewusstsein:** Manuelle Kategorisierung der Umgebung (z. B. ï¿½Im Zugï¿½, ï¿½Homeofficeï¿½, ï¿½Hotelï¿½), um statistische Vergleiche zwischen verschiedenen Arbeitsorten zu ermï¿½glichen.
+4. **Proaktive Warnsysteme:** Intelligente Benachrichtigungen, die den Nutzer warnen, _bevor_ die Verbindung komplett abreiï¿½t (z. B. bei steigender Latenz), und informieren, sobald die Leitung wieder stabil ist.
     
 
 ### Nutzenversprechen (Value Proposition)
 
-Für den Endanwender wandelt das Tool das abstrakte Gefühl von „schlechtem Internet“ in harte Fakten um.
+Fï¿½r den Endanwender wandelt das Tool das abstrakte Gefï¿½hl von ï¿½schlechtem Internetï¿½ in harte Fakten um.
 
 - **Planbarkeit:** Der Nutzer wird gewarnt, wichtige Arbeit zu speichern, wenn die Verbindung instabil wird.
-- **Beweisbarkeit:** Historische Daten dienen als Beleg gegenüber Internetanbietern bei Störungen.
-- **Erkenntnisgewinn:** Der Nutzer lernt, an welchen Orten oder in welchen Verkehrsmitteln produktives Arbeiten möglich ist.
+- **Beweisbarkeit:** Historische Daten dienen als Beleg gegenï¿½ber Internetanbietern bei Stï¿½rungen.
+- **Erkenntnisgewinn:** Der Nutzer lernt, an welchen Orten oder in welchen Verkehrsmitteln produktives Arbeiten mï¿½glich ist.
 
 
 
-### Epic 0: UI-Grundgerüst & App-Skelett
+### Epic 0: UI-Grundgerï¿½st & App-Skelett
 
 **Story 0.1: Hauptfenster (Main Shell)**
 
-> **Als** Nutzer **möchte ich** ein modernes Anwendungsfenster öffnen können, das als Rahmen für alle zukünftigen Inhalte dient, **damit** ich einen zentralen Einstiegspunkt für die Nutzung des Tools habe.
+> **Als** Nutzer **mï¿½chte ich** ein modernes Anwendungsfenster ï¿½ffnen kï¿½nnen, das als Rahmen fï¿½r alle zukï¿½nftigen Inhalte dient, **damit** ich einen zentralen Einstiegspunkt fï¿½r die Nutzung des Tools habe.
 
 - **Akzeptanzkriterien:**
-    - Das Fenster verfügt über Standard-Windows-Steuerelemente (Minimieren, Maximieren, Schließen).
+    - Das Fenster verfï¿½gt ï¿½ber Standard-Windows-Steuerelemente (Minimieren, Maximieren, Schlieï¿½en).
     - Der Titel der Anwendung wird in der Titelleiste angezeigt.
-    - Das Fenster hat eine definierte Mindestgröße, um Darstellungsfehler zu vermeiden.
-    - Das Design nutzt ein modernes Framework (z. B. WPF, WinUI 3 oder .NET MAUI) für einen zeitgemäßen Look.
+    - Das Fenster hat eine definierte Mindestgrï¿½ï¿½e, um Darstellungsfehler zu vermeiden.
+    - Das Design nutzt ein modernes Framework (z. B. WPF, WinUI 3 oder .NET MAUI) fï¿½r einen zeitgemï¿½ï¿½en Look.
 
 **Story 0.2: Navigationsstruktur**
 
-> **Als** Nutzer **möchte ich** über eine Seitenleiste oder Tabs zwischen den verschiedenen Hauptbereichen (Dashboard, Historie, Einstellungen) wechseln können, **damit** ich später schnell auf die entsprechenden Funktionen zugreifen kann.
+> **Als** Nutzer **mï¿½chte ich** ï¿½ber eine Seitenleiste oder Tabs zwischen den verschiedenen Hauptbereichen (Dashboard, Historie, Einstellungen) wechseln kï¿½nnen, **damit** ich spï¿½ter schnell auf die entsprechenden Funktionen zugreifen kann.
 
 - **Akzeptanzkriterien:**
     - Eine Navigationsleiste (z. B. linksseitig) ist implementiert.
-    - Es gibt Platzhalter-Buttons für „Dashboard“, „Verlauf“ und „Einstellungen“.
-    - Beim Klick auf einen Menüpunkt wechselt der Hauptinhaltsbereich (Content Region) auf eine leere Platzhalter-Ansicht des jeweiligen Bereichs (Routing funktioniert).
+    - Es gibt Platzhalter-Buttons fï¿½r ï¿½Dashboardï¿½, ï¿½Verlaufï¿½ und ï¿½Einstellungenï¿½.
+    - Beim Klick auf einen Menï¿½punkt wechselt der Hauptinhaltsbereich (Content Region) auf eine leere Platzhalter-Ansicht des jeweiligen Bereichs (Routing funktioniert).
         
 
 **Story 0.3: System Tray Integration (Infobereich)**
 
-> **Als** Nutzer **möchte ich**, dass sich die Anwendung in den Windows System Tray (Bereich neben der Uhr) minimieren lässt, anstatt geschlossen zu werden, **damit** das Tool später unauffällig im Hintergrund laufen kann, ohne Platz in der Taskleiste zu verbrauchen.
+> **Als** Nutzer **mï¿½chte ich**, dass sich die Anwendung in den Windows System Tray (Bereich neben der Uhr) minimieren lï¿½sst, anstatt geschlossen zu werden, **damit** das Tool spï¿½ter unauffï¿½llig im Hintergrund laufen kann, ohne Platz in der Taskleiste zu verbrauchen.
 
 - **Akzeptanzkriterien:**
     
-    - Beim Klick auf das „X“ (Schließen) wird die App nicht beendet, sondern in den Tray minimiert.
+    - Beim Klick auf das ï¿½Xï¿½ (Schlieï¿½en) wird die App nicht beendet, sondern in den Tray minimiert.
     - Es gibt ein App-Icon im System Tray.
-    - Ein Doppelklick auf das Tray-Icon öffnet das Hauptfenster wieder.
-    - Ein Rechtsklick auf das Tray-Icon öffnet ein Kontextmenü mit der Option „Beenden“, um die App vollständig zu schließen.
+    - Ein Doppelklick auf das Tray-Icon ï¿½ffnet das Hauptfenster wieder.
+    - Ein Rechtsklick auf das Tray-Icon ï¿½ffnet ein Kontextmenï¿½ mit der Option ï¿½Beendenï¿½, um die App vollstï¿½ndig zu schlieï¿½en.
         
 
 **Story 0.4: Dashboard-Layout (Wireframe)**
 
-> **Als** Nutzer **möchte ich** auf der Startseite (Dashboard) bereits die grobe Aufteilung der Elemente sehen (Platzhalter für Graphen, Platzhalter für aktuelle Werte, Platzhalter für Location-Tag), **damit** die visuelle Hierarchie klar ist, bevor die echte Datenanbindung erfolgt.
+> **Als** Nutzer **mï¿½chte ich** auf der Startseite (Dashboard) bereits die grobe Aufteilung der Elemente sehen (Platzhalter fï¿½r Graphen, Platzhalter fï¿½r aktuelle Werte, Platzhalter fï¿½r Location-Tag), **damit** die visuelle Hierarchie klar ist, bevor die echte Datenanbindung erfolgt.
 
 - **Akzeptanzkriterien:**
-    - Das Layout ist in logische Zonen unterteilt (z. B. "Live-Status" oben groß, "Verlauf" unten kleiner).
-    - Die UI ist "Responsive": Wenn ich das Fenster größer ziehe, passen sich die Platzhalter-Boxen sinnvoll an die neue Größe an.
+    - Das Layout ist in logische Zonen unterteilt (z. B. "Live-Status" oben groï¿½, "Verlauf" unten kleiner).
+    - Die UI ist "Responsive": Wenn ich das Fenster grï¿½ï¿½er ziehe, passen sich die Platzhalter-Boxen sinnvoll an die neue Grï¿½ï¿½e an.
 
 
 ### Epic 1: Netzwerk-Monitoring (Ping & Traffic)
 
-**Story 1.1: Regelmäßiger Ping**
+**Story 1.1: Regelmï¿½ï¿½iger Ping**
 
-> **Als** Nutzer **möchte ich**, dass das Tool in konfigurierbaren Abständen automatisch einen Ping an einen zuverlässigen Server (z. B. Google DNS) sendet, **damit** ich die aktuelle Latenz (Verzögerung) meiner Internetverbindung überwachen kann.
+> **Als** Nutzer **mï¿½chte ich**, dass das Tool in konfigurierbaren Abstï¿½nden automatisch einen Ping an einen zuverlï¿½ssigen Server (z. B. Google DNS) sendet, **damit** ich die aktuelle Latenz (Verzï¿½gerung) meiner Internetverbindung ï¿½berwachen kann.
 
 - **Akzeptanzkriterien:**
     - Der Ping erfolgt im Hintergrund ohne Blockieren der UI.
@@ -84,13 +84,13 @@ Für den Endanwender wandelt das Tool das abstrakte Gefühl von „schlechtem Intern
     - Die Antwortzeit (ms) wird gespeichert.
         
 
-**Story 1.2: Traffic-Überwachung**
+**Story 1.2: Traffic-ï¿½berwachung**
 
-> **Als** Nutzer **möchte ich** den aktuellen Datendurchsatz (Upload und Download) meines gesamten Systems in Echtzeit sehen, **damit** ich einschätzen kann, ob eine langsame Verbindung an der Leitung oder an meiner eigenen Bandbreitennutzung liegt.
+> **Als** Nutzer **mï¿½chte ich** den aktuellen Datendurchsatz (Upload und Download) meines gesamten Systems in Echtzeit sehen, **damit** ich einschï¿½tzen kann, ob eine langsame Verbindung an der Leitung oder an meiner eigenen Bandbreitennutzung liegt.
 
 - **Akzeptanzkriterien:**
     - Das Tool liest die Bytes Sent/Received der aktiven Netzwerkkarte aus.
-    - Die Anzeige erfolgt in verständlichen Einheiten (KB/s, MB/s).
+    - Die Anzeige erfolgt in verstï¿½ndlichen Einheiten (KB/s, MB/s).
 
 ---
 
@@ -98,23 +98,23 @@ Für den Endanwender wandelt das Tool das abstrakte Gefühl von „schlechtem Intern
 
 **Story 2.1: Standort-Tracking**
 
-> **Als** mobiler Nutzer **möchte ich**, dass meine Verbindungsdaten automatisch mit meinen GPS-Koordinaten (oder Windows Location Service) verknüpft werden, **damit** ich später auf einer Karte sehen kann, an welchen geografischen Orten ich Funklöcher hatte.
+> **Als** mobiler Nutzer **mï¿½chte ich**, dass meine Verbindungsdaten automatisch mit meinen GPS-Koordinaten (oder Windows Location Service) verknï¿½pft werden, **damit** ich spï¿½ter auf einer Karte sehen kann, an welchen geografischen Orten ich Funklï¿½cher hatte.
 
 - **Akzeptanzkriterien:**
     
     - Abfrage der Windows Location API.
-    - Speicherung von Längen- und Breitengrad zu jedem Messpunkt.
-    - Fallback-Option, falls kein GPS verfügbar ist (z. B. "Standort unbekannt").
+    - Speicherung von Lï¿½ngen- und Breitengrad zu jedem Messpunkt.
+    - Fallback-Option, falls kein GPS verfï¿½gbar ist (z. B. "Standort unbekannt").
         
 
 **Story 2.2: Kontext-Kategorisierung (Tagging)**
 
-> **Als** Nutzer **möchte ich** aus vordefinierten Kategorien (Zug, Auto, Zuhause, Café, Unterwegs) meinen aktuellen Status auswählen können, **damit** ich statistisch auswerten kann, welches Verkehrsmittel oder welcher Ort die stabilste Verbindung bietet.
+> **Als** Nutzer **mï¿½chte ich** aus vordefinierten Kategorien (Zug, Auto, Zuhause, Cafï¿½, Unterwegs) meinen aktuellen Status auswï¿½hlen kï¿½nnen, **damit** ich statistisch auswerten kann, welches Verkehrsmittel oder welcher Ort die stabilste Verbindung bietet.
 
 - **Akzeptanzkriterien:**
-    - Dropdown oder Schnellwahltasten in der UI für den Modus.
-    - Der gewählte Modus wird für alle folgenden Messungen gespeichert, bis er geändert wird.
-    - Möglichkeit, eigene Kategorien hinzuzufügen.
+    - Dropdown oder Schnellwahltasten in der UI fï¿½r den Modus.
+    - Der gewï¿½hlte Modus wird fï¿½r alle folgenden Messungen gespeichert, bis er geï¿½ndert wird.
+    - Mï¿½glichkeit, eigene Kategorien hinzuzufï¿½gen.
         
 
 ---
@@ -123,49 +123,56 @@ Für den Endanwender wandelt das Tool das abstrakte Gefühl von „schlechtem Intern
 
 **Story 3.1: Warnung bei Verbindungsabbau**
 
-> **Als** Nutzer **möchte ich** eine Desktop-Benachrichtigung erhalten, sobald die Latenz einen bestimmten Schwellenwert überschreitet oder der Ping fehlschlägt, **damit** ich gewarnt bin, bevor mein Video-Call abbricht oder ich wichtige Arbeit speichere.
+> **Als** Nutzer **mï¿½chte ich** eine Desktop-Benachrichtigung erhalten, sobald die Latenz einen bestimmten Schwellenwert ï¿½berschreitet oder der Ping fehlschlï¿½gt, **damit** ich gewarnt bin, bevor mein Video-Call abbricht oder ich wichtige Arbeit speichere.
 
 - **Akzeptanzkriterien:**
     
     - Schwellenwert ist konfigurierbar (z. B. Ping > 200ms oder 3 Pakete verloren).
     - Benachrichtigung erscheint als Windows Toast Notification.
-    - Option, den Alarm stummzuschalten (z. B. "Für 1 Stunde ignorieren").
-    - Negative visuelle Rückmeldung (z. B. Rotes Icon).
-        
+    - Option, den Alarm stummzuschalten (z. B. "Fï¿½r 1 Stunde ignorieren").
+    - Negative visuelle Rï¿½ckmeldung (z. B. Rotes Icon).
 
 **Story 3.2: Info bei Wiederherstellung**
 
-> **Als** Nutzer **möchte ich** benachrichtigt werden, sobald die Verbindungswerte wieder im normalen Bereich sind, **damit** ich weiß, wann ich meine Online-Tätigkeiten fortsetzen kann, ohne ständig manuell prüfen zu müssen.
+> **Als** Nutzer **mï¿½chte ich** benachrichtigt werden, sobald die Verbindungswerte wieder im normalen Bereich sind, **damit** ich weiï¿½, wann ich meine Online-Tï¿½tigkeiten fortsetzen kann, ohne stï¿½ndig manuell prï¿½fen zu mï¿½ssen.
 
 - **Akzeptanzkriterien:**
-    
-    - Die Benachrichtigung erfolgt erst, wenn die Verbindung für eine definierte Zeit (z. B. 30 Sekunden) stabil war (um „Flackern“ zu vermeiden).
-    - Positive visuelle Rückmeldung (z. B. Grünes Icon).
+    - Die Benachrichtigung erfolgt erst, wenn die Verbindung fï¿½r eine definierte Zeit (z. B. 30 Sekunden) stabil war (um ï¿½Flackernï¿½ zu vermeiden).
+    - Positive visuelle Rï¿½ckmeldung (z. B. Grï¿½nes Icon).
         
 
 ---
+
+
+**Story 3.3: Ã„ndern des Ping Servers.**
+> Als Nutzer mÃ¶chte ich die mÃ¶glichkeit haben den server den ich anpinge zu Ã¤ndern. Ich mÃ¶chte eine liste von seiten haben die ich anpingen kann. Darunter soll cloudflare, telekom, google, und quad9 sein.
+Akzeptanzkriterien:
+    - Der Nutzer hat die mÃ¶glichkeit den Ping Server zu Ã¤ndern.
+    - Der ausgewÃ¤hlte wird persistent gespeichert fÃ¼r den nÃ¤chsten app start.
+
+
 
 ### Epic 4: Datenhistorie & UI
 
 **Story 4.1: Verlaufansicht**
 
-> **Als** Nutzer **möchte ich** eine grafische Übersicht (Chart) der letzten Stunden sehen, **damit** ich erkennen kann, ob Verbindungsprobleme sporadisch oder dauerhaft waren.
+> **Als** Nutzer **mï¿½chte ich** eine grafische ï¿½bersicht (Chart) der letzten Stunden sehen, **damit** ich erkennen kann, ob Verbindungsprobleme sporadisch oder dauerhaft waren.
 
 - **Akzeptanzkriterien:**
     
-    - Liniendiagramm für Ping-Zeiten.
-    - Markierung von Verbindungsabbrüchen im Diagramm (rot).
-    - Filterung nach Datum/Uhrzeit möglich.
+    - Liniendiagramm fï¿½r Ping-Zeiten.
+    - Markierung von Verbindungsabbrï¿½chen im Diagramm (rot).
+    - Filterung nach Datum/Uhrzeit mï¿½glich.
         
 
 **Story 4.2: Datenexport**
 
-> **Als** technisch versierter Nutzer **möchte ich** meine gesammelten Daten als CSV-Datei exportieren können, **damit** ich sie in Excel analysieren oder meinem Internetanbieter als Beweis für schlechte Leistung vorlegen kann.
+> **Als** technisch versierter Nutzer **mï¿½chte ich** meine gesammelten Daten als CSV-Datei exportieren kï¿½nnen, **damit** ich sie in Excel analysieren oder meinem Internetanbieter als Beweis fï¿½r schlechte Leistung vorlegen kann.
 
 - **Akzeptanzkriterien:**
     
     - Export-Button in den Einstellungen.
-    - CSV enthält: Timestamp, Ping, Download-Rate, Upload-Rate, GPS, Kontext-Tag.
+    - CSV enthï¿½lt: Timestamp, Ping, Download-Rate, Upload-Rate, GPS, Kontext-Tag.
         
 
 ---
@@ -174,7 +181,7 @@ Für den Endanwender wandelt das Tool das abstrakte Gefühl von „schlechtem Intern
 
 **Story 5.1: Autostart**
 
-> **Als** Nutzer **möchte ich**, dass das Tool beim Start von Windows automatisch im Hintergrund (System Tray) startet, **damit** ich nicht jedes Mal daran denken muss, die Messung zu aktivieren.
+> **Als** Nutzer **mï¿½chte ich**, dass das Tool beim Start von Windows automatisch im Hintergrund (System Tray) startet, **damit** ich nicht jedes Mal daran denken muss, die Messung zu aktivieren.
 
 - **Akzeptanzkriterien:**
     
@@ -184,4 +191,4 @@ Für den Endanwender wandelt das Tool das abstrakte Gefühl von „schlechtem Intern
 
 ---
 
-Möchtest du diese Stories noch weiter verfeinern (z. B. Designs für das UI diskutieren) oder soll ich dir helfen, eine Architektur für die Windows-App zu entwerfen?
+Mï¿½chtest du diese Stories noch weiter verfeinern (z. B. Designs fï¿½r das UI diskutieren) oder soll ich dir helfen, eine Architektur fï¿½r die Windows-App zu entwerfen?

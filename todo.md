@@ -95,6 +95,13 @@
 - [x] Add green icon/visual indicator for good connection
 - [x] Prevent notification "flicker" during unstable periods
 
+### Story 3.3: Ändern des Ping Servers
+- [ ] Allow user to change the ping server selection in settings
+- [ ] Provide default server list: Cloudflare, Telekom, Google, Quad9
+- [ ] Persist selected server so it is restored on next app start
+- [ ] Add settings UI control (dropdown/radio) for selecting server
+- [ ] Ensure ping service reads the persisted selection at startup
+
 ---
 
 ## Epic 4: Datenhistorie & UI
