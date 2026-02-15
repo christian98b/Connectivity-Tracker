@@ -1,0 +1,20 @@
+﻿Connectivity Tracker
+1.0.0.0
+
+winexe
+C#
+.cs
+C:\Users\Chris\projects\Connectivity Tracker\Connectivity Tracker\obj\Debug\net8.0-windows10.0.22621.0\
+Connectivity_Tracker
+none
+false
+TRACE;DEBUG;NET;NET8_0;NETCOREAPP
+C:\Users\Chris\projects\Connectivity Tracker\Connectivity Tracker\App.xaml
+41777581530
+
+18-44773117
+307565881861
+MainWindow.xaml;Views\DashboardView.xaml;Views\HistoryView.xaml;Views\SettingsView.xaml;
+
+True
+

@@ -10,11 +10,11 @@ none
 false
 TRACE;RELEASE;NET;NET8_0;NETCOREAPP
 C:\Users\Chris\projects\Connectivity Tracker\Connectivity Tracker\App.xaml
-11407045341
+41777581530
 
-4-1889663642
-198-1431420039
-MainWindow.xaml;
+16312168977
+3051591528976
+MainWindow.xaml;Views\DashboardView.xaml;Views\HistoryView.xaml;Views\SettingsView.xaml;
 
 True
 

@@ -7,7 +7,7 @@ namespace Connectivity_Tracker.Services
     public class NotificationService
     {
         private readonly NotifyIcon _notifyIcon;
-        private readonly int _alertThreshold;
+        private int _alertThreshold;
         private DateTime _lastAlertTime = DateTime.MinValue;
         private readonly TimeSpan _alertCooldown = TimeSpan.FromMinutes(5);
         private bool _isConnectionPoor = false;
@@ -15,6 +15,11 @@ namespace Connectivity_Tracker.Services
         public NotificationService(NotifyIcon notifyIcon, int alertThreshold = 200)
         {
             _notifyIcon = notifyIcon;
+            _alertThreshold = alertThreshold;
+        }
+
+        public void UpdateThreshold(int alertThreshold)
+        {
             _alertThreshold = alertThreshold;
         }
 

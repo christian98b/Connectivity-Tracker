@@ -59,12 +59,12 @@
 ## Epic 2: Standort & Kontext
 
 ### Story 2.1: Standort-Tracking
-- [ ] Integrate Windows Location API
-- [ ] Request location permissions
-- [ ] Capture GPS coordinates (latitude/longitude)
-- [ ] Store location data with each measurement
-- [ ] Implement fallback for unavailable GPS ("Standort unbekannt")
-- [ ] Test location accuracy and update frequency
+- [x] Integrate Windows Location API
+- [x] Request location permissions
+- [x] Capture GPS coordinates (latitude/longitude)
+- [x] Store location data with each measurement
+- [x] Implement fallback for unavailable GPS ("Standort unbekannt")
+- [x] Test location accuracy and update frequency
 
 ### Story 2.2: Kontext-Kategorisierung (Tagging)
 - [x] Create predefined categories (Zug, Auto, Zuhause, Café, Unterwegs)
@@ -84,7 +84,7 @@
 - [x] Trigger alert when threshold exceeded
 - [x] Add red icon/visual indicator for poor connection
 - [x] Implement "Snooze" functionality (ignore for X minutes)
-- [ ] Add settings UI for threshold configuration
+- [x] Add settings UI for threshold configuration
 - [x] Test notification reliability
 
 ### Story 3.2: Info bei Wiederherstellung

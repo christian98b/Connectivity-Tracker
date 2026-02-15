@@ -12,21 +12,41 @@ namespace Connectivity_Tracker
     {
         private NotifyIcon? _notifyIcon;
         private readonly NetworkMonitorService _networkService;
-        private readonly NotificationService _notificationService;
+        private NotificationService _notificationService;
         private readonly DatabaseRepository _databaseRepository;
+        private readonly SettingsService _settingsService;
 
         public MainWindow()
         {
             InitializeComponent();
             InitializeSystemTray();
 
+            _settingsService = new SettingsService();
             _databaseRepository = new DatabaseRepository();
-            _notificationService = new NotificationService(_notifyIcon!, 200);
-            _networkService = new NetworkMonitorService();
+
+            var settings = _settingsService.CurrentSettings;
+            _notificationService = new NotificationService(_notifyIcon!, settings.AlertThresholdMs);
+            _networkService = new NetworkMonitorService(settings.PingTarget, settings.PingIntervalSeconds);
             _networkService.MetricsUpdated += OnMetricsUpdated;
-            _networkService.Start();
+
+            _settingsService.SettingsChanged += OnSettingsChanged;
+
+            InitializeServicesAsync();
 
             NavigateToDashboard(null, null);
+        }
+
+        private void OnSettingsChanged(object? sender, EventArgs e)
+        {
+            var settings = _settingsService.CurrentSettings;
+            _notificationService.UpdateThreshold(settings.AlertThresholdMs);
+            _networkService.UpdateInterval(settings.PingIntervalSeconds);
+        }
+
+        private async void InitializeServicesAsync()
+        {
+            await _networkService.InitializeAsync();
+            _networkService.Start();
         }
 
         private async void OnMetricsUpdated(object? sender, Models.NetworkMetrics metrics)
@@ -96,7 +116,7 @@ namespace Connectivity_Tracker
 
         private void NavigateToSettings(object? sender, RoutedEventArgs? e)
         {
-            MainContentArea.Content = new SettingsView();
+            MainContentArea.Content = new SettingsView(_settingsService, _databaseRepository);
             UpdateNavigationButtonState(SettingsButton);
         }
 
