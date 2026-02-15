@@ -103,12 +103,12 @@
 - [x] Ensure ping service reads the persisted selection at startup
 
 ### Story 3.4: Icon in the Taskbar
-- [ ] Display current ping value on the application's Taskbar button
-- [ ] Implement dynamic overlay icon generation (render ping number into a small icon)
-- [ ] Update overlay at ping interval and throttle updates to reduce overhead
-- [ ] Add `Settings` toggle `Show ping in taskbar` and persist choice
-- [ ] Fallback to system tray tooltip if taskbar overlay is unsupported
-- [ ] Add unit/integration tests and manual verification steps
+- [x] Display current ping value on the application's Taskbar button
+- [x] Implement dynamic overlay icon generation (render ping number into a small icon)
+- [x] Update overlay at ping interval and throttle updates to reduce overhead
+- [x] Add `Settings` toggle `Show ping in taskbar` and persist choice
+- [x] Fallback to system tray tooltip if taskbar overlay is unsupported
+- [x] Add unit/integration tests and manual verification steps
 
 ---
 

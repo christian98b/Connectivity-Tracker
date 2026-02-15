@@ -5,6 +5,8 @@ VisualStudioVersion = 17.12.35521.163 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connectivity Tracker", "Connectivity Tracker\Connectivity Tracker.csproj", "{82DA7CCC-BAE6-451F-A8E2-FA953031B84A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connectivity Tracker.Tests", "Connectivity Tracker.Tests\Connectivity Tracker.Tests.csproj", "{A3D2BFD7-9E6A-4A90-B3E0-1F064F9A89B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{82DA7CCC-BAE6-451F-A8E2-FA953031B84A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82DA7CCC-BAE6-451F-A8E2-FA953031B84A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82DA7CCC-BAE6-451F-A8E2-FA953031B84A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3D2BFD7-9E6A-4A90-B3E0-1F064F9A89B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3D2BFD7-9E6A-4A90-B3E0-1F064F9A89B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3D2BFD7-9E6A-4A90-B3E0-1F064F9A89B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3D2BFD7-9E6A-4A90-B3E0-1F064F9A89B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

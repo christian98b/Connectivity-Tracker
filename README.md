@@ -141,4 +141,13 @@ Repeat for `win-arm64` and produce `ConnectivityTracker-win-arm64.msi`.
 
 ---
 
+## Story 3.4 manual verification (Taskbar ping)
+- Open **Settings** and enable **Show ping in taskbar**, then click **Save Settings**.
+- Keep the app visible in the taskbar and verify the taskbar button overlay updates with current ping values.
+- Change ping interval (5/10/60s), save, and confirm overlay updates follow the selected interval.
+- Disable **Show ping in taskbar**, save, and confirm the taskbar overlay clears.
+- On systems without taskbar overlay support, verify the system tray tooltip shows `Ping: <value> ms` or `Ping: unavailable`.
+
+---
+
 If you want, I can add a WiX installer project to this repository (one MSI per-architecture) — tell me which packaging preferences you prefer (self-contained vs framework-dependent, installer UI, autostart option, code signing).

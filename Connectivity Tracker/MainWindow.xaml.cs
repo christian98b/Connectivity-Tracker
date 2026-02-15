@@ -5,6 +5,7 @@ using Connectivity_Tracker.Views;
 using Connectivity_Tracker.Services;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Windows.Shell;
 
 namespace Connectivity_Tracker
 {
@@ -15,6 +16,9 @@ namespace Connectivity_Tracker
         private NotificationService _notificationService;
         private readonly DatabaseRepository _databaseRepository;
         private readonly SettingsService _settingsService;
+        private readonly TaskbarPingOverlayService _taskbarPingOverlayService;
+        private bool _showPingInTaskbar;
+        private bool _taskbarOverlaySupported = true;
 
         // Cached views to prevent memory leaks from event handler subscriptions
         private DashboardView? _dashboardView;
@@ -28,8 +32,10 @@ namespace Connectivity_Tracker
 
             _settingsService = new SettingsService();
             _databaseRepository = new DatabaseRepository();
+            _taskbarPingOverlayService = new TaskbarPingOverlayService(TimeSpan.FromSeconds(2));
 
             var settings = _settingsService.CurrentSettings;
+            _showPingInTaskbar = settings.ShowPingInTaskbar;
             _notificationService = new NotificationService(_notifyIcon!, settings.AlertThresholdMs);
             _networkService = new NetworkMonitorService(settings.PingTarget, settings.PingIntervalSeconds);
             _networkService.MetricsUpdated += OnMetricsUpdated;
@@ -47,6 +53,18 @@ namespace Connectivity_Tracker
             _notificationService.UpdateThreshold(settings.AlertThresholdMs);
             _networkService.UpdateInterval(settings.PingIntervalSeconds);
             _networkService.UpdatePingTarget(settings.PingTarget);
+            _showPingInTaskbar = settings.ShowPingInTaskbar;
+
+            if (!_showPingInTaskbar)
+            {
+                TaskbarItemInfo ??= new TaskbarItemInfo();
+                TaskbarItemInfo.Overlay = null;
+
+                if (_notifyIcon is not null)
+                {
+                    _notifyIcon.Text = "Connectivity Tracker";
+                }
+            }
         }
 
         private async void InitializeServicesAsync()
@@ -57,8 +75,44 @@ namespace Connectivity_Tracker
 
         private async void OnMetricsUpdated(object? sender, Models.NetworkMetrics metrics)
         {
+            await Dispatcher.InvokeAsync(() => UpdateTaskbarPing(metrics));
             _notificationService.CheckAndNotify(metrics);
             await _databaseRepository.SaveMetricsAsync(metrics);
+        }
+
+        private void UpdateTaskbarPing(Models.NetworkMetrics metrics)
+        {
+            if (_notifyIcon is null)
+            {
+                return;
+            }
+
+            var update = _taskbarPingOverlayService.BuildUpdate(metrics, _showPingInTaskbar, _taskbarOverlaySupported);
+            _notifyIcon.Text = update.TrayTooltip;
+
+            TaskbarItemInfo ??= new TaskbarItemInfo();
+
+            if (!_showPingInTaskbar || update.UseTrayFallback)
+            {
+                TaskbarItemInfo.Overlay = null;
+                return;
+            }
+
+            if (update.OverlayImage is not null)
+            {
+                try
+                {
+                    TaskbarItemInfo.Overlay = update.OverlayImage;
+                }
+                catch
+                {
+                    _taskbarOverlaySupported = false;
+                    TaskbarItemInfo.Overlay = null;
+
+                    var fallbackUpdate = _taskbarPingOverlayService.BuildUpdate(metrics, _showPingInTaskbar, false);
+                    _notifyIcon.Text = fallbackUpdate.TrayTooltip;
+                }
+            }
         }
 
         private void InitializeSystemTray()

@@ -7,5 +7,6 @@ namespace Connectivity_Tracker.Models
         public int AlertThresholdMs { get; set; } = 200;
         public bool StartWithWindows { get; set; } = false;
         public bool MinimizeToTrayOnStartup { get; set; } = true;
+        public bool ShowPingInTaskbar { get; set; } = true;
     }
 }

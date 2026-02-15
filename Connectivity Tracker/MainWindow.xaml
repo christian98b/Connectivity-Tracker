@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Connectivity_Tracker"
+    xmlns:local="clr-namespace:Connectivity_Tracker"
+    xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
         mc:Ignorable="d"
         Title="Connectivity Tracker"
         Height="600"
@@ -13,6 +14,10 @@
         Background="#F5F5F5"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResize">
+
+    <Window.TaskbarItemInfo>
+        <shell:TaskbarItemInfo />
+    </Window.TaskbarItemInfo>
 
     <Window.Resources>
         <!-- Modern Button Style -->
