@@ -13,6 +13,7 @@ namespace Connectivity_Tracker.Services
         private NetworkMetrics _currentMetrics;
 
         public event EventHandler<NetworkMetrics>? MetricsUpdated;
+        public event EventHandler<(double downloadSpeed, double uploadSpeed)>? TrafficUpdated;
 
         public NetworkMonitorService(string pingTarget = "8.8.8.8", int pingIntervalSeconds = 10)
         {
@@ -22,7 +23,7 @@ namespace Connectivity_Tracker.Services
             _locationService = new LocationService();
             _currentMetrics = new NetworkMetrics();
 
-            _trafficMonitor.TrafficUpdated += OnTrafficUpdated;
+            _trafficMonitor.TrafficUpdated += OnTrafficSampled;
         }
 
         public async Task InitializeAsync()
@@ -61,10 +62,11 @@ namespace Connectivity_Tracker.Services
             }
         }
 
-        private void OnTrafficUpdated(object? sender, (double downloadSpeed, double uploadSpeed) traffic)
+        private void OnTrafficSampled(object? sender, (double downloadSpeed, double uploadSpeed) traffic)
         {
             _currentMetrics.DownloadSpeed = traffic.downloadSpeed;
             _currentMetrics.UploadSpeed = traffic.uploadSpeed;
+            TrafficUpdated?.Invoke(this, traffic);
         }
 
         private async Task PerformPingAsync()

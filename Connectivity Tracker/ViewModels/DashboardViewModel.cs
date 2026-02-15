@@ -63,13 +63,13 @@ namespace Connectivity_Tracker.ViewModels
                 LatencyColor = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F44336"));
             }
 
-            DownloadRate = metrics.DownloadSpeed > 0
-                ? $"{FormatSpeed(metrics.DownloadSpeed)}"
-                : "-- KB/s";
+            UpdateTraffic(metrics.DownloadSpeed, metrics.UploadSpeed);
+        }
 
-            UploadRate = metrics.UploadSpeed > 0
-                ? $"{FormatSpeed(metrics.UploadSpeed)}"
-                : "-- KB/s";
+        public void UpdateTraffic(double downloadSpeed, double uploadSpeed)
+        {
+            DownloadRate = FormatSpeed(Math.Max(0, downloadSpeed));
+            UploadRate = FormatSpeed(Math.Max(0, uploadSpeed));
         }
 
         private string FormatSpeed(double bytesPerSecond)

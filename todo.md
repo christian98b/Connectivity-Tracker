@@ -53,6 +53,7 @@
 - [x] Display real-time traffic in UI
 - [x] Update traffic display at regular intervals
 - [x] Handle multiple network adapters
+- [x] Fix dashboard traffic refresh and idle-speed (`0 B/s`) display behavior
 
 ---
 

@@ -20,6 +20,7 @@ namespace Connectivity_Tracker.Views
             DataContext = _viewModel;
 
             _networkService.MetricsUpdated += OnMetricsUpdated;
+            _networkService.TrafficUpdated += OnTrafficUpdated;
         }
 
         private void OnMetricsUpdated(object? sender, Models.NetworkMetrics metrics)
@@ -28,6 +29,14 @@ namespace Connectivity_Tracker.Views
             Dispatcher.Invoke(() =>
             {
                 _viewModel.UpdateMetrics(metrics);
+            });
+        }
+
+        private void OnTrafficUpdated(object? sender, (double downloadSpeed, double uploadSpeed) traffic)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                _viewModel.UpdateTraffic(traffic.downloadSpeed, traffic.uploadSpeed);
             });
         }
 
@@ -44,6 +53,7 @@ namespace Connectivity_Tracker.Views
             if (!_disposed)
             {
                 _networkService.MetricsUpdated -= OnMetricsUpdated;
+                _networkService.TrafficUpdated -= OnTrafficUpdated;
                 _disposed = true;
             }
             GC.SuppressFinalize(this);
