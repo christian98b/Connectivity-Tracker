@@ -100,13 +100,13 @@
 ## Epic 4: Datenhistorie & UI
 
 ### Story 4.1: Verlaufansicht
-- [ ] Choose and integrate charting library
-- [ ] Implement line chart for ping times
-- [ ] Add red markers for connection failures
-- [ ] Implement date/time filtering
-- [ ] Add zoom and pan functionality
-- [ ] Display historical traffic data
-- [ ] Add legend and axis labels
+- [x] Choose and integrate charting library
+- [x] Implement line chart for ping times
+- [x] Add red markers for connection failures
+- [x] Implement date/time filtering
+- [x] Add zoom and pan functionality
+- [x] Display historical traffic data
+- [x] Add legend and axis labels
 
 ### Story 4.2: Datenexport
 - [ ] Create export button in settings

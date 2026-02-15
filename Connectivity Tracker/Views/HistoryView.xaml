@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Connectivity_Tracker.Views"
+             xmlns:oxy="http://oxyplot.org/wpf"
              mc:Ignorable="d"
              d:DesignHeight="450"
-        d:DesignWidth="800"
+             d:DesignWidth="800"
              Background="#F5F5F5">
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -14,51 +14,88 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Header -->
         <TextBlock Text="History / Verlauf"
                    FontSize="28"
                    FontWeight="Bold"
                    Foreground="#333"
                    Margin="0,0,0,20"/>
 
-        <!-- Content Area -->
         <Border Style="{StaticResource Card}"
                 Grid.Row="1"
                 Background="White">
-            <StackPanel>
-                <TextBlock Text="Connection History Chart"
-                           FontSize="20"
-                           FontWeight="SemiBold"
-                           Margin="0,0,0,15"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                <!-- Date Filter Placeholder -->
-                <StackPanel Orientation="Horizontal"
-                        Margin="0,0,0,15">
-                    <TextBlock Text="Date Range:"
-                               VerticalAlignment="Center"
-                               Margin="0,0,10,0"/>
-                    <TextBox Width="150"
-                             Height="30"
-                             Padding="5"
-                             Text="Start Date"
-                             Margin="0,0,10,0"/>
-                    <TextBox Width="150"
-                             Height="30"
-                             Padding="5"
-                             Text="End Date"/>
-                </StackPanel>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                <!-- Chart Placeholder -->
-                <Border Height="300"
-                        Background="#F5F5F5"
-                        CornerRadius="4">
-                    <TextBlock Text="[Historical Chart Placeholder]"
-                               HorizontalAlignment="Center"
+                    <TextBlock Grid.Column="0"
+                               Text="Start:"
                                VerticalAlignment="Center"
-                               Foreground="#999"
-                               FontSize="16"/>
-                </Border>
-            </StackPanel>
+                               Margin="0,0,8,0"/>
+                    <DatePicker x:Name="StartDatePicker"
+                                Grid.Column="1"
+                                SelectedDateChanged="OnFilterChanged"
+                                Margin="0,0,8,0"/>
+                    <TextBox x:Name="StartTimeTextBox"
+                             Grid.Column="2"
+                             Text="00:00"
+                             VerticalContentAlignment="Center"
+                             Padding="6,4"
+                             TextChanged="OnFilterChanged"
+                             Margin="0,0,14,0"/>
+
+                    <TextBlock Grid.Column="3"
+                               Text="End:"
+                               VerticalAlignment="Center"
+                               Margin="0,0,8,0"/>
+                    <DatePicker x:Name="EndDatePicker"
+                                Grid.Column="4"
+                                SelectedDateChanged="OnFilterChanged"
+                                Margin="0,0,8,0"/>
+                    <TextBox x:Name="EndTimeTextBox"
+                             Grid.Column="5"
+                             Text="23:59"
+                             VerticalContentAlignment="Center"
+                             Padding="6,4"
+                             TextChanged="OnFilterChanged"
+                             Margin="0,0,14,0"/>
+
+                    <Button Grid.Column="6"
+                            Content="Last 24h"
+                            Style="{StaticResource ModernButton}"
+                            Click="SetLast24Hours"
+                            Margin="0,0,8,0"/>
+                    <Button Grid.Column="7"
+                            Content="Apply"
+                            Style="{StaticResource ModernButton}"
+                            Click="ApplyFilter"/>
+                </Grid>
+
+                <oxy:PlotView x:Name="HistoryPlot"
+                              Grid.Row="1"
+                              Height="340"
+                              Model="{Binding HistoryPlotModel}"
+                              Margin="0,0,0,10"/>
+
+                <TextBlock Grid.Row="2"
+                           Text="Tip: Use mouse wheel to zoom and right-click drag to pan."
+                           Foreground="#666"
+                           FontSize="12"/>
+            </Grid>
         </Border>
     </Grid>
 </UserControl>

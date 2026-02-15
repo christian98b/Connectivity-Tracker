@@ -120,7 +120,8 @@ namespace Connectivity_Tracker
 
         private void NavigateToHistory(object? sender, RoutedEventArgs? e)
         {
-            _historyView ??= new HistoryView();
+            _historyView ??= new HistoryView(_databaseRepository);
+            _historyView.RefreshData();
             MainContentArea.Content = _historyView;
             UpdateNavigationButtonState(HistoryButton);
         }
