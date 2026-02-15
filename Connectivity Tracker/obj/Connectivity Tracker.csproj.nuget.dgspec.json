@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Chris\\source\\repos\\Connectivity Tracker\\Connectivity Tracker\\Connectivity Tracker.csproj": {}
+    "C:\\Users\\Chris\\projects\\Connectivity Tracker\\Connectivity Tracker\\Connectivity Tracker.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Chris\\source\\repos\\Connectivity Tracker\\Connectivity Tracker\\Connectivity Tracker.csproj": {
+    "C:\\Users\\Chris\\projects\\Connectivity Tracker\\Connectivity Tracker\\Connectivity Tracker.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Chris\\source\\repos\\Connectivity Tracker\\Connectivity Tracker\\Connectivity Tracker.csproj",
+        "projectUniqueName": "C:\\Users\\Chris\\projects\\Connectivity Tracker\\Connectivity Tracker\\Connectivity Tracker.csproj",
         "projectName": "Connectivity Tracker",
-        "projectPath": "C:\\Users\\Chris\\source\\repos\\Connectivity Tracker\\Connectivity Tracker\\Connectivity Tracker.csproj",
+        "projectPath": "C:\\Users\\Chris\\projects\\Connectivity Tracker\\Connectivity Tracker\\Connectivity Tracker.csproj",
         "packagesPath": "C:\\Users\\Chris\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Chris\\source\\repos\\Connectivity Tracker\\Connectivity Tracker\\obj\\",
+        "outputPath": "C:\\Users\\Chris\\projects\\Connectivity Tracker\\Connectivity Tracker\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
