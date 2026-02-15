@@ -54,7 +54,7 @@ namespace Connectivity_Tracker.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Connectivity Tracker;V1.0.0.0;component/views/historyview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Connectivity Tracker;component/views/historyview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\HistoryView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
