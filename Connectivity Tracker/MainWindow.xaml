@@ -5,8 +5,116 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Connectivity_Tracker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Connectivity Tracker"
+        Height="600"
+        Width="1000"
+        MinHeight="500"
+        MinWidth="800"
+        Background="#F5F5F5"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResize">
 
+    <Window.Resources>
+        <!-- Modern Button Style -->
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Background" Value="#2196F3"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="15,10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="5"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#1976D2"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Card Style -->
+        <Style x:Key="Card" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="10"
+                                    ShadowDepth="2"
+                                    Opacity="0.2"
+                                    Color="#000000"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Bar -->
+        <Border Grid.Row="0" Background="#1976D2" Padding="20,15">
+            <Grid>
+                <TextBlock Text="Connectivity Tracker"
+                          FontSize="24"
+                          FontWeight="Bold"
+                          Foreground="White"
+                          VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+
+        <!-- Main Content Area -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Navigation Sidebar -->
+            <Border Grid.Column="0"
+                    Background="#FFFFFF"
+                    BorderBrush="#E0E0E0"
+                    BorderThickness="0,0,1,0">
+                <StackPanel Margin="0,20,0,0">
+                    <Button x:Name="DashboardButton"
+                            Content="Dashboard"
+                            Style="{StaticResource ModernButton}"
+                            Margin="10,5"
+                            Click="NavigateToDashboard"
+                            Background="#2196F3"/>
+
+                    <Button x:Name="HistoryButton"
+                            Content="History"
+                            Style="{StaticResource ModernButton}"
+                            Margin="10,5"
+                            Click="NavigateToHistory"
+                            Background="#757575"/>
+
+                    <Button x:Name="SettingsButton"
+                            Content="Settings"
+                            Style="{StaticResource ModernButton}"
+                            Margin="10,5"
+                            Click="NavigateToSettings"
+                            Background="#757575"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Content Region -->
+            <ContentControl Grid.Column="1"
+                           x:Name="MainContentArea"
+                           Content="{Binding}"/>
+        </Grid>
     </Grid>
 </Window>

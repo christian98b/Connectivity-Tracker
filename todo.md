@@ -3,56 +3,56 @@
 ## Epic 0: UI-Grundgerüst & App-Skelett
 
 ### Story 0.1: Hauptfenster (Main Shell)
-- [ ] Create main application window with WPF
-- [ ] Implement standard Windows controls (Minimize, Maximize, Close)
-- [ ] Add application title to title bar
-- [ ] Set minimum window size
-- [ ] Apply modern design framework styling
+- [x] Create main application window with WPF
+- [x] Implement standard Windows controls (Minimize, Maximize, Close)
+- [x] Add application title to title bar
+- [x] Set minimum window size
+- [x] Apply modern design framework styling
 
 ### Story 0.2: Navigationsstruktur
-- [ ] Implement navigation sidebar/tab structure
-- [ ] Create placeholder buttons for Dashboard
-- [ ] Create placeholder buttons for History/Verlauf
-- [ ] Create placeholder buttons for Settings/Einstellungen
-- [ ] Implement routing between different views
-- [ ] Test navigation between all sections
+- [x] Implement navigation sidebar/tab structure
+- [x] Create placeholder buttons for Dashboard
+- [x] Create placeholder buttons for History/Verlauf
+- [x] Create placeholder buttons for Settings/Einstellungen
+- [x] Implement routing between different views
+- [x] Test navigation between all sections
 
 ### Story 0.3: System Tray Integration
-- [ ] Implement minimize to system tray instead of close
-- [ ] Add application icon to system tray
-- [ ] Implement double-click to restore window from tray
-- [ ] Create right-click context menu for tray icon
-- [ ] Add "Exit/Beenden" option in context menu
-- [ ] Ensure proper cleanup on exit
+- [x] Implement minimize to system tray instead of close
+- [x] Add application icon to system tray
+- [x] Implement double-click to restore window from tray
+- [x] Create right-click context menu for tray icon
+- [x] Add "Exit/Beenden" option in context menu
+- [x] Ensure proper cleanup on exit
 
 ### Story 0.4: Dashboard-Layout (Wireframe)
-- [ ] Design dashboard layout with logical zones
-- [ ] Create placeholder for live status section (top)
-- [ ] Create placeholder for history graphs (bottom)
-- [ ] Create placeholder for location tag display
-- [ ] Implement responsive layout behavior
-- [ ] Test window resizing and element adaptation
+- [x] Design dashboard layout with logical zones
+- [x] Create placeholder for live status section (top)
+- [x] Create placeholder for history graphs (bottom)
+- [x] Create placeholder for location tag display
+- [x] Implement responsive layout behavior
+- [x] Test window resizing and element adaptation
 
 ---
 
 ## Epic 1: Netzwerk-Monitoring (Ping & Traffic)
 
 ### Story 1.1: Regelmäßiger Ping
-- [ ] Implement background ping functionality
-- [ ] Configure ping to reliable server (e.g., Google DNS 8.8.8.8)
-- [ ] Add configurable ping interval (5s, 10s, 60s options)
-- [ ] Store ping response times (ms) in data structure
-- [ ] Ensure non-blocking UI during ping operations
-- [ ] Add error handling for failed pings
-- [ ] Display current latency in UI
+- [x] Implement background ping functionality
+- [x] Configure ping to reliable server (e.g., Google DNS 8.8.8.8)
+- [x] Add configurable ping interval (5s, 10s, 60s options)
+- [x] Store ping response times (ms) in data structure
+- [x] Ensure non-blocking UI during ping operations
+- [x] Add error handling for failed pings
+- [x] Display current latency in UI
 
 ### Story 1.2: Traffic-Überwachung
-- [ ] Read network adapter statistics (Bytes Sent/Received)
-- [ ] Calculate upload/download rates
-- [ ] Convert to readable units (KB/s, MB/s)
-- [ ] Display real-time traffic in UI
-- [ ] Update traffic display at regular intervals
-- [ ] Handle multiple network adapters
+- [x] Read network adapter statistics (Bytes Sent/Received)
+- [x] Calculate upload/download rates
+- [x] Convert to readable units (KB/s, MB/s)
+- [x] Display real-time traffic in UI
+- [x] Update traffic display at regular intervals
+- [x] Handle multiple network adapters
 
 ---
 
@@ -67,32 +67,32 @@
 - [ ] Test location accuracy and update frequency
 
 ### Story 2.2: Kontext-Kategorisierung (Tagging)
-- [ ] Create predefined categories (Zug, Auto, Zuhause, Café, Unterwegs)
-- [ ] Implement dropdown/quick select UI for context selection
-- [ ] Store selected context with measurements
-- [ ] Persist context selection until manually changed
-- [ ] Add ability to create custom categories
-- [ ] Display current context in UI
+- [x] Create predefined categories (Zug, Auto, Zuhause, Café, Unterwegs)
+- [x] Implement dropdown/quick select UI for context selection
+- [x] Store selected context with measurements
+- [x] Persist context selection until manually changed
+- [x] Add ability to create custom categories
+- [x] Display current context in UI
 
 ---
 
 ## Epic 3: Benachrichtigungen & Alerts
 
 ### Story 3.1: Warnung bei Verbindungsabbau
-- [ ] Define configurable alert thresholds (e.g., Ping > 200ms)
-- [ ] Implement Windows Toast Notification system
-- [ ] Trigger alert when threshold exceeded
-- [ ] Add red icon/visual indicator for poor connection
-- [ ] Implement "Snooze" functionality (ignore for X minutes)
+- [x] Define configurable alert thresholds (e.g., Ping > 200ms)
+- [x] Implement Windows Toast Notification system
+- [x] Trigger alert when threshold exceeded
+- [x] Add red icon/visual indicator for poor connection
+- [x] Implement "Snooze" functionality (ignore for X minutes)
 - [ ] Add settings UI for threshold configuration
-- [ ] Test notification reliability
+- [x] Test notification reliability
 
 ### Story 3.2: Info bei Wiederherstellung
-- [ ] Detect when connection returns to normal range
-- [ ] Implement stability check (30s stable before notification)
-- [ ] Send recovery notification
-- [ ] Add green icon/visual indicator for good connection
-- [ ] Prevent notification "flicker" during unstable periods
+- [x] Detect when connection returns to normal range
+- [x] Implement stability check (30s stable before notification)
+- [x] Send recovery notification
+- [x] Add green icon/visual indicator for good connection
+- [x] Prevent notification "flicker" during unstable periods
 
 ---
 
@@ -132,10 +132,10 @@
 ## Additional Technical Tasks
 
 ### Data Persistence
-- [ ] Choose database solution (SQLite recommended)
-- [ ] Design database schema
-- [ ] Implement data access layer
-- [ ] Add automatic data cleanup (old records)
+- [x] Choose database solution (SQLite recommended)
+- [x] Design database schema
+- [x] Implement data access layer
+- [x] Add automatic data cleanup (old records)
 - [ ] Implement data migration strategy
 
 ### Testing & Quality

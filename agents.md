@@ -6,4 +6,6 @@ Your workflow is as follows. You always use the todo.md file for tasks and the u
 
 If the todo file (with todos with checkboxes)= is empty, use the userstories.md file to transform the userstories into todos you need to do, in order to achieve the project goal.
 
-Then if the todo.md is existing. Program the todos in order and check them off as you go.
+Program the todos in order and check them off as you go
+
+Your architecture is using the mvc pattern.
