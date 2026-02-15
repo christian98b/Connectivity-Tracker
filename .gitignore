@@ -1,1 +1,51 @@
-Connectivity Tracker/obj
+# --- Visual Studio / .NET artifacts ---
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build output
+bin/
+obj/
+**/bin/
+**/obj/
+
+# VS Code (ignore workspace/user-specific files, keep shared settings if you add exceptions)
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+
+# NuGet & packages
+*.nupkg
+packages/
+.nuget/
+
+# JetBrains / Rider
+.idea/
+_ReSharper*/
+*.DotSettings.user
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Logs / temp
+*.log
+*.vsix
+
+# Local DB / runtime files
+*.db
+*.db-shm
+*.db-wal
+*.mdf
+*.ldf
+
+# Misc
+*.pdb
+*.exe
+# Project user file (IDE-specific)
+*.csproj.user
+
