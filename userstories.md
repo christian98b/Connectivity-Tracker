@@ -94,6 +94,17 @@ F�r den Endanwender wandelt das Tool das abstrakte Gef�hl von �schlechtem 
 
 ---
 
+
+**Story 1.3: Packet Loss**
+
+> **Als** Nutzer **m�chte ich** den Packet Loss sehen um festzustellen ob pakete empfangen und gesendet werden. Ich möchte außerdem neben dem ping auch über den packetloss eine benachrichtigung erhalten.
+
+- **Akzeptanzkriterien:**
+    - Man erhält Benachrichtigungen wie beim Ping
+    - Also Icon und Im system tray kann man neben dem Ping auch Packet Loss auswählen.
+
+---
+
 ### Epic 2: Standort & Kontext
 
 **Story 2.1: Standort-Tracking**

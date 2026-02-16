@@ -55,6 +55,13 @@
 - [x] Handle multiple network adapters
 - [x] Fix dashboard traffic refresh and idle-speed (`0 B/s`) display behavior
 
+### Story 1.3: Packet Loss
+- [ ] Add packet loss tracking next to existing ping measurements
+- [ ] Display packet loss percentage in the dashboard and allow switching tray icon metrics between ping and packet loss
+- [ ] Trigger notifications (with icons) when packet loss exceeds warning thresholds, matching the ping alert flow
+- [ ] Persist the tray icon metric choice so the preference is restored at startup
+- [ ] Write unit/integration tests covering packet loss detection and notification behavior
+
 ---
 
 ## Epic 2: Standort & Kontext
@@ -120,7 +127,6 @@
 ---
 
 ## Epic 4: Datenhistorie & UI
-
 ### Story 4.1: Verlaufansicht
 - [x] Choose and integrate charting library
 - [x] Implement line chart for ping times
