@@ -11,6 +11,8 @@ namespace Connectivity_Tracker.Services
         private readonly TrafficMonitorService _trafficMonitor;
         private readonly LocationService _locationService;
         private NetworkMetrics _currentMetrics;
+        private readonly Queue<bool> _recentPingResults;
+        private const int MaxPingHistorySize = 20;
 
         public event EventHandler<NetworkMetrics>? MetricsUpdated;
         public event EventHandler<(double downloadSpeed, double uploadSpeed)>? TrafficUpdated;
@@ -22,6 +24,7 @@ namespace Connectivity_Tracker.Services
             _trafficMonitor = new TrafficMonitorService();
             _locationService = new LocationService();
             _currentMetrics = new NetworkMetrics();
+            _recentPingResults = new Queue<bool>(MaxPingHistorySize);
 
             _trafficMonitor.TrafficUpdated += OnTrafficSampled;
         }
@@ -77,6 +80,24 @@ namespace Connectivity_Tracker.Services
             TrafficUpdated?.Invoke(this, traffic);
         }
 
+        private void TrackPingResult(bool success)
+        {
+            if (_recentPingResults.Count >= MaxPingHistorySize)
+            {
+                _recentPingResults.Dequeue();
+            }
+            _recentPingResults.Enqueue(success);
+        }
+
+        private double CalculatePacketLossPercentage()
+        {
+            if (_recentPingResults.Count == 0)
+                return 0;
+
+            int failedPings = _recentPingResults.Count(result => !result);
+            return (failedPings / (double)_recentPingResults.Count) * 100.0;
+        }
+
         private async Task PerformPingAsync()
         {
             try
@@ -85,23 +106,29 @@ namespace Connectivity_Tracker.Services
                 using var pinger = new Ping();
                 var reply = await pinger.SendPingAsync(currentPingTarget, 5000);
 
+                bool success = reply.Status == IPStatus.Success;
+                TrackPingResult(success);
+
                 var (latitude, longitude) = await _locationService.GetCurrentLocationAsync();
 
                 var metrics = new NetworkMetrics
                 {
                     Timestamp = DateTime.Now,
-                    PingSuccess = reply.Status == IPStatus.Success,
+                    PingSuccess = success,
                     PingLatency = reply.RoundtripTime,
                     DownloadSpeed = _currentMetrics.DownloadSpeed,
                     UploadSpeed = _currentMetrics.UploadSpeed,
                     Latitude = latitude,
-                    Longitude = longitude
+                    Longitude = longitude,
+                    PacketLossPercentage = CalculatePacketLossPercentage()
                 };
 
                 MetricsUpdated?.Invoke(this, metrics);
             }
             catch
             {
+                TrackPingResult(false);
+
                 var (latitude, longitude) = await _locationService.GetCurrentLocationAsync();
 
                 var metrics = new NetworkMetrics
@@ -112,7 +139,8 @@ namespace Connectivity_Tracker.Services
                     DownloadSpeed = _currentMetrics.DownloadSpeed,
                     UploadSpeed = _currentMetrics.UploadSpeed,
                     Latitude = latitude,
-                    Longitude = longitude
+                    Longitude = longitude,
+                    PacketLossPercentage = CalculatePacketLossPercentage()
                 };
 
                 MetricsUpdated?.Invoke(this, metrics);
@@ -137,7 +165,8 @@ namespace Connectivity_Tracker.Services
                     DownloadSpeed = _currentMetrics.DownloadSpeed,
                     UploadSpeed = _currentMetrics.UploadSpeed,
                     Latitude = latitude,
-                    Longitude = longitude
+                    Longitude = longitude,
+                    PacketLossPercentage = CalculatePacketLossPercentage()
                 };
             }
             catch
@@ -152,7 +181,8 @@ namespace Connectivity_Tracker.Services
                     DownloadSpeed = _currentMetrics.DownloadSpeed,
                     UploadSpeed = _currentMetrics.UploadSpeed,
                     Latitude = latitude,
-                    Longitude = longitude
+                    Longitude = longitude,
+                    PacketLossPercentage = CalculatePacketLossPercentage()
                 };
             }
         }

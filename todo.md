@@ -56,11 +56,11 @@
 - [x] Fix dashboard traffic refresh and idle-speed (`0 B/s`) display behavior
 
 ### Story 1.3: Packet Loss
-- [ ] Add packet loss tracking next to existing ping measurements
-- [ ] Display packet loss percentage in the dashboard and allow switching tray icon metrics between ping and packet loss
-- [ ] Trigger notifications (with icons) when packet loss exceeds warning thresholds, matching the ping alert flow
-- [ ] Persist the tray icon metric choice so the preference is restored at startup
-- [ ] Write unit/integration tests covering packet loss detection and notification behavior
+- [x] Add packet loss tracking next to existing ping measurements
+- [x] Display packet loss percentage in the dashboard and allow switching tray icon metrics between ping and packet loss
+- [x] Trigger notifications (with icons) when packet loss exceeds warning thresholds, matching the ping alert flow
+- [x] Persist the tray icon metric choice so the preference is restored at startup
+- [x] Write unit/integration tests covering packet loss detection and notification behavior
 
 ---
 

@@ -11,6 +11,7 @@ namespace Connectivity_Tracker.ViewModels
         private string _latency = "--";
         private string _downloadRate = "--";
         private string _uploadRate = "--";
+        private string _packetLoss = "--";
         private System.Windows.Media.Brush _latencyColor = System.Windows.Media.Brushes.Gray;
         private string _connectionStatus = "Connecting...";
         private PlotModel _historyPlotModel;
@@ -36,6 +37,12 @@ namespace Connectivity_Tracker.ViewModels
         {
             get => _uploadRate;
             set => SetProperty(ref _uploadRate, value);
+        }
+
+        public string PacketLoss
+        {
+            get => _packetLoss;
+            set => SetProperty(ref _packetLoss, value);
         }
 
         public System.Windows.Media.Brush LatencyColor
@@ -78,6 +85,7 @@ namespace Connectivity_Tracker.ViewModels
                 LatencyColor = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F44336"));
             }
 
+            PacketLoss = $"{metrics.PacketLossPercentage:F1}%";
             UpdateTraffic(metrics.DownloadSpeed, metrics.UploadSpeed);
         }
 

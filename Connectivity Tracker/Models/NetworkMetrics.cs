@@ -10,5 +10,6 @@ namespace Connectivity_Tracker.Models
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
         public string Context { get; set; } = string.Empty;
+        public double PacketLossPercentage { get; set; }
     }
 }

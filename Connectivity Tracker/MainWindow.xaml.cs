@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using Connectivity_Tracker.Views;
 using Connectivity_Tracker.Services;
+using Connectivity_Tracker.Models;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Shell;
@@ -23,6 +24,7 @@ namespace Connectivity_Tracker
         private bool _taskbarOverlaySupported = true;
         private DateTime _lastTrayIconUpdate = DateTime.MinValue;
         private readonly TimeSpan _trayIconUpdateThrottle = TimeSpan.FromSeconds(2);
+        private NetworkMetrics? _currentMetrics;
 
         // Cached views to prevent memory leaks from event handler subscriptions
         private DashboardView? _dashboardView;
@@ -32,16 +34,17 @@ namespace Connectivity_Tracker
         public MainWindow()
         {
             InitializeComponent();
-            InitializeSystemTray();
 
             _settingsService = new SettingsService();
             _databaseRepository = new DatabaseRepository();
             _taskbarPingOverlayService = new TaskbarPingOverlayService(TimeSpan.FromSeconds(2));
 
+            InitializeSystemTray();
+
             var settings = _settingsService.CurrentSettings;
             _showPingInTaskbar = settings.ShowPingInTaskbar;
             _showPingInTray = settings.ShowPingInTray;
-            _notificationService = new NotificationService(_notifyIcon!, settings.AlertThresholdMs);
+            _notificationService = new NotificationService(_notifyIcon!, settings.AlertThresholdMs, settings.PacketLossAlertThreshold);
             _networkService = new NetworkMonitorService(settings.PingTarget, settings.PingIntervalSeconds);
             _networkService.MetricsUpdated += OnMetricsUpdated;
 
@@ -56,6 +59,7 @@ namespace Connectivity_Tracker
         {
             var settings = _settingsService.CurrentSettings;
             _notificationService.UpdateThreshold(settings.AlertThresholdMs);
+            _notificationService.UpdatePacketLossThreshold(settings.PacketLossAlertThreshold);
             _networkService.UpdateInterval(settings.PingIntervalSeconds);
             _networkService.UpdatePingTarget(settings.PingTarget);
             _showPingInTaskbar = settings.ShowPingInTaskbar;
@@ -87,6 +91,7 @@ namespace Connectivity_Tracker
 
         private async void OnMetricsUpdated(object? sender, Models.NetworkMetrics metrics)
         {
+            _currentMetrics = metrics;
             await Dispatcher.InvokeAsync(() => UpdateTaskbarPing(metrics));
             _notificationService.CheckAndNotify(metrics);
             await _databaseRepository.SaveMetricsAsync(metrics);
@@ -100,9 +105,19 @@ namespace Connectivity_Tracker
             }
 
             var update = _taskbarPingOverlayService.BuildUpdate(metrics, _showPingInTaskbar, _taskbarOverlaySupported);
-            _notifyIcon.Text = update.TrayTooltip;
 
-            // Update tray icon with ping value if enabled and throttling allows
+            // Update tray tooltip based on selected metric
+            var settings = _settingsService.CurrentSettings;
+            if (settings.TrayMetric == TrayMetricType.PacketLoss)
+            {
+                _notifyIcon.Text = $"Connectivity Tracker - Packet Loss: {metrics.PacketLossPercentage:F1}%";
+            }
+            else
+            {
+                _notifyIcon.Text = update.TrayTooltip;
+            }
+
+            // Update tray icon with ping or packet loss value if enabled and throttling allows
             if (_showPingInTray)
             {
                 var now = DateTime.UtcNow;
@@ -110,8 +125,16 @@ namespace Connectivity_Tracker
                 {
                     try
                     {
-                        var pingMs = metrics.PingSuccess ? (int?)metrics.PingLatency : null;
-                        var newIcon = TrayIconGenerator.GeneratePingIcon(pingMs);
+                        Icon? newIcon;
+                        if (settings.TrayMetric == TrayMetricType.PacketLoss)
+                        {
+                            newIcon = TrayIconGenerator.GeneratePacketLossIcon(metrics.PacketLossPercentage);
+                        }
+                        else
+                        {
+                            var pingMs = metrics.PingSuccess ? (int?)metrics.PingLatency : null;
+                            newIcon = TrayIconGenerator.GeneratePingIcon(pingMs);
+                        }
 
                         // Dispose old icon before setting new one to prevent memory leaks
                         var oldIcon = _notifyIcon.Icon;
@@ -180,6 +203,62 @@ namespace Connectivity_Tracker
                 WindowState = WindowState.Normal;
                 Activate();
             });
+            contextMenu.Items.Add("-");
+
+            // Tray metric selection submenu
+            var trayMetricMenu = new ToolStripMenuItem("Tray Metric");
+            var showPingItem = new ToolStripMenuItem("Show Ping") { CheckOnClick = true };
+            var showPacketLossItem = new ToolStripMenuItem("Show Packet Loss") { CheckOnClick = true };
+
+            // Set initial checked state based on current settings
+            var settings = _settingsService.CurrentSettings;
+            showPingItem.Checked = settings.TrayMetric == TrayMetricType.Ping;
+            showPacketLossItem.Checked = settings.TrayMetric == TrayMetricType.PacketLoss;
+
+            showPingItem.Click += (sender, args) =>
+            {
+                if (showPingItem.Checked)
+                {
+                    showPacketLossItem.Checked = false;
+                    settings.TrayMetric = TrayMetricType.Ping;
+                    _settingsService.SaveSettings(settings);
+
+                    // Force immediate update
+                    if (_currentMetrics != null)
+                    {
+                        UpdateTaskbarPing(_currentMetrics);
+                    }
+                }
+                else
+                {
+                    showPingItem.Checked = true; // Always have one selected
+                }
+            };
+
+            showPacketLossItem.Click += (sender, args) =>
+            {
+                if (showPacketLossItem.Checked)
+                {
+                    showPingItem.Checked = false;
+                    settings.TrayMetric = TrayMetricType.PacketLoss;
+                    _settingsService.SaveSettings(settings);
+
+                    // Force immediate update
+                    if (_currentMetrics != null)
+                    {
+                        UpdateTaskbarPing(_currentMetrics);
+                    }
+                }
+                else
+                {
+                    showPacketLossItem.Checked = true; // Always have one selected
+                }
+            };
+
+            trayMetricMenu.DropDownItems.Add(showPingItem);
+            trayMetricMenu.DropDownItems.Add(showPacketLossItem);
+            contextMenu.Items.Add(trayMetricMenu);
+
             contextMenu.Items.Add("-");
             contextMenu.Items.Add("Exit", null, (sender, args) =>
             {

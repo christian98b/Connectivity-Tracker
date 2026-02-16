@@ -25,6 +25,7 @@ namespace Connectivity_Tracker.ViewModels
         private int _selectedPingIntervalIndex;
         private int _selectedPingServerIndex;
         private string _alertThreshold = string.Empty;
+        private string _packetLossThreshold = string.Empty;
         private bool _startWithWindows;
         private bool _minimizeToTrayOnStartup;
         private bool _showPingInTaskbar;
@@ -49,6 +50,12 @@ namespace Connectivity_Tracker.ViewModels
         {
             get => _alertThreshold;
             set => SetProperty(ref _alertThreshold, value);
+        }
+
+        public string PacketLossThreshold
+        {
+            get => _packetLossThreshold;
+            set => SetProperty(ref _packetLossThreshold, value);
         }
 
         public bool StartWithWindows
@@ -121,6 +128,7 @@ namespace Connectivity_Tracker.ViewModels
                 .FirstOrDefault(item => string.Equals(item.option.Target, settings.PingTarget, StringComparison.OrdinalIgnoreCase))?.index ?? 2;
 
             _alertThreshold = settings.AlertThresholdMs.ToString();
+            _packetLossThreshold = settings.PacketLossAlertThreshold.ToString();
             _startWithWindows = settings.StartWithWindows;
             _minimizeToTrayOnStartup = settings.MinimizeToTrayOnStartup;
             _showPingInTaskbar = settings.ShowPingInTaskbar;
@@ -133,6 +141,17 @@ namespace Connectivity_Tracker.ViewModels
             {
                 System.Windows.MessageBox.Show(
                     "Please enter a valid number for alert threshold.",
+                    "Invalid Input",
+                    System.Windows.MessageBoxButton.OK,
+                    System.Windows.MessageBoxImage.Warning
+                );
+                return;
+            }
+
+            if (!double.TryParse(_packetLossThreshold, out double packetLossThreshold) || packetLossThreshold < 0 || packetLossThreshold > 100)
+            {
+                System.Windows.MessageBox.Show(
+                    "Please enter a valid number between 0 and 100 for packet loss threshold.",
                     "Invalid Input",
                     System.Windows.MessageBoxButton.OK,
                     System.Windows.MessageBoxImage.Warning
@@ -157,6 +176,7 @@ namespace Connectivity_Tracker.ViewModels
                 PingIntervalSeconds = pingInterval,
                 PingTarget = selectedPingServer.Target,
                 AlertThresholdMs = threshold,
+                PacketLossAlertThreshold = packetLossThreshold,
                 StartWithWindows = _startWithWindows,
                 MinimizeToTrayOnStartup = _minimizeToTrayOnStartup,
                 ShowPingInTaskbar = _showPingInTaskbar,
@@ -189,13 +209,14 @@ namespace Connectivity_Tracker.ViewModels
                 {
                     var lines = new List<string>
                     {
-                        "Timestamp,PingSuccess,PingLatency,DownloadSpeed,UploadSpeed,Latitude,Longitude,Context"
+                        "Timestamp,PingSuccess,PingLatency,DownloadSpeed,UploadSpeed,PacketLossPercentage,Latitude,Longitude,Context"
                     };
 
                     foreach (var metric in metrics)
                     {
                         lines.Add($"{metric.Timestamp:O},{metric.PingSuccess},{metric.PingLatency}," +
                                  $"{metric.DownloadSpeed},{metric.UploadSpeed}," +
+                                 $"{metric.PacketLossPercentage:F2}," +
                                  $"{metric.Latitude?.ToString() ?? ""}," +
                                  $"{metric.Longitude?.ToString() ?? ""}," +
                                  $"\"{metric.Context}\"");

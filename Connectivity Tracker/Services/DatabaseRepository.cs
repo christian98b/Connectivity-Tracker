@@ -38,9 +38,24 @@ namespace Connectivity_Tracker.Services
                     UploadSpeed REAL NOT NULL,
                     Latitude REAL,
                     Longitude REAL,
-                    Context TEXT
+                    Context TEXT,
+                    PacketLossPercentage REAL DEFAULT 0
                 )";
             command.ExecuteNonQuery();
+
+            // Migration: Add PacketLossPercentage column if it doesn't exist
+            try
+            {
+                var alterCommand = connection.CreateCommand();
+                alterCommand.CommandText = @"
+                    ALTER TABLE NetworkMetrics
+                    ADD COLUMN PacketLossPercentage REAL DEFAULT 0";
+                alterCommand.ExecuteNonQuery();
+            }
+            catch (SqliteException)
+            {
+                // Column already exists, ignore error
+            }
         }
 
         public async Task SaveMetricsAsync(NetworkMetrics metrics)
@@ -53,8 +68,8 @@ namespace Connectivity_Tracker.Services
                 var command = connection.CreateCommand();
                 command.CommandText = @"
                     INSERT INTO NetworkMetrics
-                    (Timestamp, PingLatency, PingSuccess, DownloadSpeed, UploadSpeed, Latitude, Longitude, Context)
-                    VALUES (@timestamp, @latency, @success, @download, @upload, @lat, @lon, @context)";
+                    (Timestamp, PingLatency, PingSuccess, DownloadSpeed, UploadSpeed, Latitude, Longitude, Context, PacketLossPercentage)
+                    VALUES (@timestamp, @latency, @success, @download, @upload, @lat, @lon, @context, @packetLoss)";
 
                 command.Parameters.AddWithValue("@timestamp", metrics.Timestamp.ToString("O"));
                 command.Parameters.AddWithValue("@latency", metrics.PingLatency);
@@ -64,6 +79,7 @@ namespace Connectivity_Tracker.Services
                 command.Parameters.AddWithValue("@lat", (object?)metrics.Latitude ?? DBNull.Value);
                 command.Parameters.AddWithValue("@lon", (object?)metrics.Longitude ?? DBNull.Value);
                 command.Parameters.AddWithValue("@context", metrics.Context);
+                command.Parameters.AddWithValue("@packetLoss", metrics.PacketLossPercentage);
 
                 command.ExecuteNonQuery();
             });
@@ -110,7 +126,8 @@ namespace Connectivity_Tracker.Services
                     UploadSpeed = reader.GetDouble(5),
                     Latitude = reader.IsDBNull(6) ? null : reader.GetDouble(6),
                     Longitude = reader.IsDBNull(7) ? null : reader.GetDouble(7),
-                    Context = reader.IsDBNull(8) ? string.Empty : reader.GetString(8)
+                    Context = reader.IsDBNull(8) ? string.Empty : reader.GetString(8),
+                    PacketLossPercentage = reader.IsDBNull(9) ? 0 : reader.GetDouble(9)
                 });
             }
 

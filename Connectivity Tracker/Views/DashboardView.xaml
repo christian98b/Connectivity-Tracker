@@ -77,6 +77,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
                         <!-- Ping Status -->
@@ -92,8 +93,21 @@
                                        Margin="0,5,0,0"/>
                         </StackPanel>
 
-                        <!-- Download Rate -->
+                        <!-- Packet Loss -->
                         <StackPanel Grid.Column="1"
+                                    Margin="0,0,20,0">
+                            <TextBlock Text="Packet Loss"
+                                       FontSize="14"
+                                       Foreground="#666"/>
+                            <TextBlock Text="{Binding PacketLoss}"
+                                       FontSize="32"
+                                       FontWeight="Bold"
+                                       Foreground="#9C27B0"
+                                       Margin="0,5,0,0"/>
+                        </StackPanel>
+
+                        <!-- Download Rate -->
+                        <StackPanel Grid.Column="2"
                                     Margin="0,0,20,0">
                             <TextBlock Text="Download"
                                        FontSize="14"
@@ -106,7 +120,7 @@
                         </StackPanel>
 
                         <!-- Upload Rate -->
-                        <StackPanel Grid.Column="2">
+                        <StackPanel Grid.Column="3">
                             <TextBlock Text="Upload"
                                        FontSize="14"
                                        Foreground="#666"/>
